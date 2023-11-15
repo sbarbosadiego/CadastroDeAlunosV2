@@ -39,5 +39,10 @@ public class CursoAlunoModel {
     public CursoAlunoModel() {
         
     }
+    
+    public CursoAlunoModel(AlunoModel aluno, CursoModel curso) {
+        this.codigoAluno = aluno;
+        this.codigoCurso = curso;
+    }
 
 }
