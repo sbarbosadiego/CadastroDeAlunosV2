@@ -43,7 +43,11 @@
             <version>5.5.7.Final</version>
             <type>jar</type>
         </dependency>
-        
+        <dependency>
+            <groupId>org.netbeans.external</groupId>
+            <artifactId>AbsoluteLayout</artifactId>
+            <version>RELEASE180</version>
+        </dependency>
     </dependencies>
     
 </project>

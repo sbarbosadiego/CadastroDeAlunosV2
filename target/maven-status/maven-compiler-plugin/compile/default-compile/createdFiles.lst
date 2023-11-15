@@ -4,12 +4,17 @@ com\localhost\cadastrodealunosv2\model\AlunoModel.class
 com\localhost\cadastrodealunosv2\view\AlunoView$4.class
 com\localhost\cadastrodealunosv2\view\MainView$20.class
 com\localhost\cadastrodealunosv2\view\MainView$17.class
+com\localhost\cadastrodealunosv2\view\MatriculaView$3.class
 com\localhost\cadastrodealunosv2\view\MainView$7.class
+com\localhost\cadastrodealunosv2\view\MatriculaView$7.class
 com\localhost\cadastrodealunosv2\controller\AlunoController.class
 com\localhost\cadastrodealunosv2\view\MainView$13.class
+com\localhost\cadastrodealunosv2\controller\CursoAlunoController.class
+com\localhost\cadastrodealunosv2\view\MatriculaView$4.class
 com\localhost\cadastrodealunosv2\view\AlunoView$1.class
 com\localhost\cadastrodealunosv2\view\AlunoView$5.class
 com\localhost\cadastrodealunosv2\model\CursoModel.class
+com\localhost\cadastrodealunosv2\view\MatriculaView$6.class
 com\localhost\cadastrodealunosv2\view\CursoView.class
 com\localhost\cadastrodealunosv2\view\CursoView$3.class
 com\localhost\cadastrodealunosv2\view\MainView$3.class
@@ -25,6 +30,7 @@ com\localhost\cadastrodealunosv2\view\MainView$6.class
 com\localhost\cadastrodealunosv2\view\MainView$14.class
 com\localhost\cadastrodealunosv2\view\MainView$9.class
 com\localhost\cadastrodealunosv2\util\FormatarData.class
+com\localhost\cadastrodealunosv2\view\MatriculaView$5.class
 com\localhost\cadastrodealunosv2\view\MainView$15.class
 com\localhost\cadastrodealunosv2\view\MainView$2.class
 com\localhost\cadastrodealunosv2\view\CursoView$2.class
@@ -33,6 +39,7 @@ com\localhost\cadastrodealunosv2\view\CursoView$5.class
 com\localhost\cadastrodealunosv2\view\MatriculaView$1.class
 com\localhost\cadastrodealunosv2\model\CursoAlunoModel.class
 com\localhost\cadastrodealunosv2\exception\CursoException.class
+com\localhost\cadastrodealunosv2\view\MatriculaView$9.class
 com\localhost\cadastrodealunosv2\view\MainView$5.class
 com\localhost\cadastrodealunosv2\view\MainView$18.class
 com\localhost\cadastrodealunosv2\view\MainView$16.class
@@ -43,8 +50,10 @@ com\localhost\cadastrodealunosv2\view\MainView$21.class
 com\localhost\cadastrodealunosv2\dao\AlunoDAO.class
 com\localhost\cadastrodealunosv2\view\AlunoView$3.class
 com\localhost\cadastrodealunosv2\view\MainView$19.class
+com\localhost\cadastrodealunosv2\view\MatriculaView$2.class
 com\localhost\cadastrodealunosv2\view\MatriculaView.class
 com\localhost\cadastrodealunosv2\view\CursoView$1.class
 com\localhost\cadastrodealunosv2\view\MainView$4.class
+com\localhost\cadastrodealunosv2\view\MatriculaView$8.class
 Teste.class
 com\localhost\cadastrodealunosv2\view\CursoView$4.class

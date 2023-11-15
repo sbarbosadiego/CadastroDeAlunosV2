@@ -1,15 +1,50 @@
 package com.localhost.cadastrodealunosv2.view;
 
+import com.localhost.cadastrodealunosv2.controller.AlunoController;
+import com.localhost.cadastrodealunosv2.controller.CursoAlunoController;
+import com.localhost.cadastrodealunosv2.controller.CursoController;
+import com.localhost.cadastrodealunosv2.model.AlunoModel;
+import com.localhost.cadastrodealunosv2.model.CursoAlunoModel;
+import com.localhost.cadastrodealunosv2.model.CursoModel;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
+
 /**
  * @author Diego Barbosa da Silva
  */
 public class MatriculaView extends javax.swing.JFrame {
+    
+    // Aluno
+    AlunoModel alunoModel = new AlunoModel();
+    AlunoController alunoController = new AlunoController();
+    ArrayList<AlunoModel> listaModelPesquisaAlunos = new ArrayList<>();
+    DefaultListModel listaAluno;
+    
+    // Curso
+    CursoModel cursoModel = new CursoModel();
+    CursoController cursoController = new CursoController();
+    ArrayList<CursoModel> listaModelPesquisaCursos = new ArrayList<>();
+    DefaultListModel listaCurso;
+    
+    // CursoAluno
+    CursoAlunoModel cursoAlunoModel;
+    CursoAlunoController cursoAlunoController = new CursoAlunoController();
+    
+    // Outros
+    int Enter = 0;
 
     /**
      * Creates new form MatriculaView
      */
     public MatriculaView() {
         initComponents();
+        listaAluno = new DefaultListModel();
+        listaCurso = new DefaultListModel();
+        listaPesquisaAluno.setModel(listaAluno);
+        listaPesquisaCurso.setModel(listaCurso);
+        listaPesquisaAluno.setVisible(false);
+        listaPesquisaCurso.setVisible(false);
     }
 
     /**
@@ -21,22 +56,139 @@ public class MatriculaView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        listaPesquisaCurso = new javax.swing.JList<>();
+        listaPesquisaAluno = new javax.swing.JList<>();
+        jtfNomeAluno = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jtfNomeCurso = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        btnSalvarMatricula = new javax.swing.JButton();
+        btnCancelarMatricula = new javax.swing.JButton();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Matrícula");
+        setMinimumSize(new java.awt.Dimension(530, 200));
+        setPreferredSize(new java.awt.Dimension(540, 200));
+        setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        listaPesquisaCurso.setBorder(null);
+        listaPesquisaCurso.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        listaPesquisaCurso.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                listaPesquisaCursoMousePressed(evt);
+            }
+        });
+        getContentPane().add(listaPesquisaCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 63, 248, 80));
+
+        listaPesquisaAluno.setBorder(null);
+        listaPesquisaAluno.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        listaPesquisaAluno.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                listaPesquisaAlunoMousePressed(evt);
+            }
+        });
+        getContentPane().add(listaPesquisaAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 63, 248, 78));
+
+        jtfNomeAluno.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jtfNomeAluno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfNomeAlunoActionPerformed(evt);
+            }
+        });
+        jtfNomeAluno.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfNomeAlunoKeyReleased(evt);
+            }
+        });
+        getContentPane().add(jtfNomeAluno, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 34, 250, 30));
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel2.setText("Aluno:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
+
+        jtfNomeCurso.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jtfNomeCurso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtfNomeCursoActionPerformed(evt);
+            }
+        });
+        jtfNomeCurso.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jtfNomeCursoKeyReleased(evt);
+            }
+        });
+        getContentPane().add(jtfNomeCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(267, 34, 250, 30));
+
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jLabel3.setText("Curso:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(267, 6, -1, -1));
+
+        btnSalvarMatricula.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnSalvarMatricula.setText("Salvar");
+        btnSalvarMatricula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalvarMatriculaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalvarMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(152, 100, 100, 31));
+
+        btnCancelarMatricula.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnCancelarMatricula.setText("Cancelar");
+        btnCancelarMatricula.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarMatriculaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCancelarMatricula, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 100, 100, 31));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtfNomeAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNomeAlunoActionPerformed
+        listaPesquisaAluno.setVisible(false);
+        Enter = 1;
+    }//GEN-LAST:event_jtfNomeAlunoActionPerformed
+
+    private void jtfNomeCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNomeCursoActionPerformed
+        listaPesquisaCurso.setVisible(false);
+        Enter = 1;
+    }//GEN-LAST:event_jtfNomeCursoActionPerformed
+
+    private void btnSalvarMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarMatriculaActionPerformed
+        salvarMatricula();
+    }//GEN-LAST:event_btnSalvarMatriculaActionPerformed
+
+    private void btnCancelarMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarMatriculaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarMatriculaActionPerformed
+
+    private void listaPesquisaAlunoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPesquisaAlunoMousePressed
+        recuperarPesquisaAluno();
+        listaPesquisaAluno.setVisible(false);
+    }//GEN-LAST:event_listaPesquisaAlunoMousePressed
+
+    private void listaPesquisaCursoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPesquisaCursoMousePressed
+        recuperarPesquisaCurso();
+        listaPesquisaCurso.setVisible(false);
+    }//GEN-LAST:event_listaPesquisaCursoMousePressed
+
+    private void jtfNomeAlunoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNomeAlunoKeyReleased
+        if (Enter == 0 ) {
+            listarPesquisaAluno();
+        } else {
+            Enter = 0;
+        }
+    }//GEN-LAST:event_jtfNomeAlunoKeyReleased
+
+    private void jtfNomeCursoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNomeCursoKeyReleased
+        if (Enter == 0 ) {
+            listarPesquisaCurso();
+        } else {
+            Enter = 0;
+        }
+    }//GEN-LAST:event_jtfNomeCursoKeyReleased
 
     /**
      * @param args the command line arguments
@@ -72,7 +224,86 @@ public class MatriculaView extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void salvarMatricula() {
+        if (jtfNomeAluno.getText().isEmpty() || jtfNomeCurso.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo vazio!", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            cursoAlunoModel = new CursoAlunoModel(alunoModel, cursoModel);
+            if (cursoAlunoController.salvarAlunoController(cursoAlunoModel) > 0) {
+                JOptionPane.showMessageDialog(null, "Matrícula cadastrado com sucesso", "ATENÇÃO",
+                        JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Matrícula não cadastrada!", "ATENÇÃO",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+    
+    /**
+     * Recupera o nome e dados de aluno ao clicar na lista de pesquisa dinâmica.
+     */
+    private void recuperarPesquisaAluno() {
+        int linha = listaPesquisaAluno.getSelectedIndex();
+        String nome = listaPesquisaAluno.getSelectedValue();
+        jtfNomeAluno.setText(nome);
+        alunoModel = alunoController.retornarAlunoNomeController(nome);
+    }
+    
+    /**
+     * Recupera o nome e dados de curso ao clicar na lista de pesquisa dinâmica.
+     */
+    private void recuperarPesquisaCurso() {
+        int linha = listaPesquisaCurso.getSelectedIndex();
+        String curso = listaPesquisaCurso.getSelectedValue();
+        jtfNomeCurso.setText(curso);
+        //cursoModel = controllerCurso.retornarCursoNomeController(curso);
+    }
+    
+    /**
+     * Lista os aluno na pesquisa dinâmica na tela de matrícula.
+     */
+    private void listarPesquisaAluno() {
+        String nomeAluno = jtfNomeAluno.getText();
+        listaModelPesquisaAlunos = (ArrayList<AlunoModel>) alunoController.retornarListarAlunoNomeController(nomeAluno);
+        listaAluno.removeAllElements();
+        for (int c = 0; c < listaModelPesquisaAlunos.size(); c++) {
+            listaAluno.addElement(listaModelPesquisaAlunos.get(c).getNomeAluno());
+        }
+        if (jtfNomeAluno.getText().isEmpty()) {
+            listaPesquisaAluno.setVisible(false);
+        } else {
+            listaPesquisaAluno.setVisible(true);
+        }
+    }
+    
+    /**
+     * Lista os curso na pesquisa dinâmica na tela de matrícula.
+     */
+    private void listarPesquisaCurso() {
+        String nomeCurso = jtfNomeAluno.getText();
+        listaModelPesquisaCursos = (ArrayList<CursoModel>) cursoController.retornarListarCursoNomeController(nomeCurso);
+        listaCurso.removeAllElements();
+        for (int c = 0; c < listaModelPesquisaCursos.size(); c++) {
+            listaCurso.addElement(listaModelPesquisaCursos.get(c).getDescricaoCurso());
+        }
+        if (jtfNomeCurso.getText().isEmpty()) {
+            listaPesquisaCurso.setVisible(false);
+        } else {
+            listaPesquisaCurso.setVisible(true);
+        }
+    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelarMatricula;
+    private javax.swing.JButton btnSalvarMatricula;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JTextField jtfNomeAluno;
+    private javax.swing.JTextField jtfNomeCurso;
+    private javax.swing.JList<String> listaPesquisaAluno;
+    private javax.swing.JList<String> listaPesquisaCurso;
     // End of variables declaration//GEN-END:variables
 }

@@ -16,23 +16,23 @@ public class Teste {
         // Aluno
         AlunoModel modelAluno = new AlunoModel();
         AlunoDAO alunoDao = new AlunoDAO();
-        modelAluno = alunoDao.retornarAluno(16L);
+        modelAluno = alunoDao.retornarAlunoNome("cau");
         System.out.println(modelAluno.toString());
         
         // Curso
         CursoModel modelCurso = new CursoModel();
         CursoDAO cursoDao = new CursoDAO();
-        modelCurso = cursoDao.retornarCurso(21L);
-        System.out.println(modelCurso.toString());
+        //modelCurso = cursoDao.retornarCurso(21L);
+        //System.out.println(modelCurso.toString());
         
         
         // CursoAluno
-        CursoAlunoModel matricula = new CursoAlunoModel(modelAluno, modelCurso);
-        System.out.println(matricula.toString());
+        //CursoAlunoModel matricula = new CursoAlunoModel(modelAluno, modelCurso);
+        //System.out.println(matricula.toString());
         
-        CursoAlunoDAO matriculaDao = new CursoAlunoDAO();
+        //CursoAlunoDAO matriculaDao = new CursoAlunoDAO();
         //matriculaDao.cadastrarCursoAluno(matricula);
-        matriculaDao.excluirCursoAluno(5L);
+        //matriculaDao.excluirCursoAluno(5L);
         
         //AlunoDAO dao = new AlunoDAO();
         //dao.cadastrarAluno(modelAluno);

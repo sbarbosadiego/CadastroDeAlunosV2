@@ -97,12 +97,21 @@ public class CursoDAO extends Conexao {
      * @param nome
      * @return 
      */
-    public List<CursoModel> retornarListaCursoNome(String nome) {
+    public List<CursoModel> retornarListaCursoNome(String curso) {
         List<CursoModel> listaCursos = entityManager
-                .createQuery("SELECT u FROM cursos u WHERE u.descricaoCurso LIKE :nome", CursoModel.class)
-                .setParameter("nome", "%" + nome + "%")
+                .createQuery("SELECT u FROM cursos u WHERE u.descricaoCurso LIKE :curso", CursoModel.class)
+                .setParameter("curso", "%" + curso + "%")
                 .getResultList();
         return listaCursos;
+    }
+    
+    public CursoModel retornarCursoNome(String curso) {
+        CursoModel cursoModel = new CursoModel();
+        cursoModel = entityManager
+                .createQuery("SELECT u FROM cursos u WHERE u.descricaoCurso LIKE :curso", CursoModel.class)
+                .setParameter("curso", "%" + curso + "%")
+                .getSingleResult();
+        return cursoModel;
     }
     
 }

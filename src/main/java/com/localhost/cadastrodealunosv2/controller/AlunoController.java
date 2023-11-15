@@ -11,6 +11,7 @@ public class AlunoController {
     
     private AlunoDAO alunoDao = new AlunoDAO();
     
+    
     public int salvarAlunoController(AlunoModel aluno) {
         return this.alunoDao.cadastrarAluno(aluno);
     }
@@ -25,6 +26,10 @@ public class AlunoController {
     
     public AlunoModel retornarAlunoController(Long id) {
         return this.alunoDao.retornarAluno(id);
+    }
+    
+    public AlunoModel retornarAlunoNomeController(String nome) {
+        return this.alunoDao.retornarAlunoNome(nome);
     }
     
     public List<AlunoModel> retornarListarAlunosController() {

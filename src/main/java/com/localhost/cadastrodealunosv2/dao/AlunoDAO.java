@@ -104,4 +104,13 @@ public class AlunoDAO extends Conexao {
         return listaAlunos;
     }
     
+    public AlunoModel retornarAlunoNome(String nome) {
+        AlunoModel alunoModel = new AlunoModel();
+        alunoModel = entityManager
+                .createQuery("SELECT u FROM alunos u WHERE u.nomeAluno LIKE :nome", AlunoModel.class)
+                .setParameter("nome", "%" + nome + "%")
+                .getSingleResult();
+        return alunoModel;
+    }
+    
 }

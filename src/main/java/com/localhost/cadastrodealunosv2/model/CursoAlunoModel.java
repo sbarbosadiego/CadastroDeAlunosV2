@@ -30,11 +30,6 @@ public class CursoAlunoModel {
     @JoinColumn(name = "fk_curso", referencedColumnName = "pk_codigo_curso")
     private CursoModel codigoCurso;
     
-    @Transient
-    private String aluno;
-    
-    @Transient
-    private String curso;
 
     public CursoAlunoModel() {
         

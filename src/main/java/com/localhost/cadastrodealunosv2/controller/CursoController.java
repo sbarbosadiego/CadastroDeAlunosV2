@@ -27,12 +27,16 @@ public class CursoController {
         return this.cursoDao.retornarCurso(id);
     }
     
+    public CursoModel retornarCursoNomeController(String curso) {
+        return this.cursoDao.retornarCursoNome(curso);
+    }
+    
     public List<CursoModel> retornarListarCursosController() {
         return this.cursoDao.retornarListaCurso();
     }
     
-    public List<CursoModel> retornarListarCursoNomeController(String nome) {
-        return this.cursoDao.retornarListaCursoNome(nome);
+    public List<CursoModel> retornarListarCursoNomeController(String curso) {
+        return this.cursoDao.retornarListaCursoNome(curso);
     }
     
 }

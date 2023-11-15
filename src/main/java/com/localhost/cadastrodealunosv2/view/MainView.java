@@ -1,14 +1,15 @@
 package com.localhost.cadastrodealunosv2.view;
 
 import com.localhost.cadastrodealunosv2.controller.AlunoController;
+import com.localhost.cadastrodealunosv2.controller.CursoAlunoController;
 import com.localhost.cadastrodealunosv2.controller.CursoController;
 import com.localhost.cadastrodealunosv2.model.AlunoModel;
+import com.localhost.cadastrodealunosv2.model.CursoAlunoModel;
 import com.localhost.cadastrodealunosv2.model.CursoModel;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-import lombok.Data;
 
 /**
  * @author Diego Barbosa da Silva
@@ -25,16 +26,22 @@ public class MainView extends javax.swing.JFrame {
     CursoController cursoController = new CursoController();
     ArrayList<CursoModel> listaCursoModel = new ArrayList<>();
     
-    // Teste
+    // CursoAluno
+    CursoAlunoModel cursoAlunoModel = new CursoAlunoModel();
+    CursoAlunoController cursoAlunoController = new CursoAlunoController();
+    ArrayList<CursoAlunoModel> listaCursoAlunoModel = new ArrayList<>();
+    
+    // Funcional
     String editarSalvar;
+    int Enter = 0;
     
     /**
      * Creates new form MainView
      */
     public MainView() {
         initComponents();
-        listarAlunos();
-        listarCursos();
+        //listarAlunos();
+        //listarCursos();
     }
     
     /**
@@ -663,6 +670,23 @@ public class MainView extends javax.swing.JFrame {
                 listaCursoModel.get(c).getCodigoCurso(),
                 listaCursoModel.get(c).getDescricaoCurso(),
                 listaCursoModel.get(c).getDataCriacao().format(DateTimeFormatter.ISO_LOCAL_DATE)
+            });
+        }
+    }
+    
+    /**
+     * Lista alunos vinculados a cursos no banco de dados.
+     */
+    private void listarCursoAluno() {
+        listaCursoAlunoModel = (ArrayList<CursoAlunoModel>) cursoAlunoController.retornarListarCursoAlunosController();
+        DefaultTableModel tabela = (DefaultTableModel) jtbMatricula.getModel();
+        tabela.setNumRows(0);
+
+        int contador = listaCursoAlunoModel.size();
+        for (int c = 0; c < contador; c++) {
+            tabela.addRow(new Object[]{
+                listaCursoAlunoModel.get(c).getCodigoCursoAluno(),
+                listaCursoAlunoModel.get(c).getCodigoAluno()
             });
         }
     }
