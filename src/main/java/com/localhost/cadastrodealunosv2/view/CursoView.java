@@ -164,6 +164,7 @@ public class CursoView extends javax.swing.JFrame {
         if (mainView.editarSalvar.equals("salvar")) {
             salvarCurso();
             dispose();
+            mainView.setEnabled(true);
         } else if (mainView.editarSalvar.equals("editar")) {
             editarCurso();
         }
@@ -179,6 +180,7 @@ public class CursoView extends javax.swing.JFrame {
 
     private void btnCancelarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarAlunoActionPerformed
         dispose();
+        mainView.setEnabled(true);
     }//GEN-LAST:event_btnCancelarAlunoActionPerformed
 
     /**
@@ -252,6 +254,7 @@ public class CursoView extends javax.swing.JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                 mainView.listarCursos();
                 dispose();
+                mainView.setEnabled(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Curso não atualizado", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);

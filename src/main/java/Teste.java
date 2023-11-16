@@ -16,13 +16,13 @@ public class Teste {
         // Aluno
         AlunoModel modelAluno = new AlunoModel();
         AlunoDAO alunoDao = new AlunoDAO();
-        modelAluno = alunoDao.retornarAlunoNome("cau");
-        System.out.println(modelAluno.toString());
+        //modelAluno = alunoDao.retornarAlunoNome("cau");
+        //System.out.println(modelAluno.toString());
         
         // Curso
         CursoModel modelCurso = new CursoModel();
         CursoDAO cursoDao = new CursoDAO();
-        //modelCurso = cursoDao.retornarCurso(21L);
+        //modelCurso = cursoDao.retornarCursoNome("java");
         //System.out.println(modelCurso.toString());
         
         
@@ -51,6 +51,15 @@ public class Teste {
             System.out.println(aluno.toString());
         }
         */
+        
+        
+        List<CursoModel> lista = new ArrayList<>();
+        lista = cursoDao.retornarListaCursoNome("java");
+        
+        for (CursoModel aluno: lista) {
+            System.out.println(aluno.toString());
+        }
+        
         
         
     }

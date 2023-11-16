@@ -40,8 +40,9 @@ public class MainView extends javax.swing.JFrame {
      */
     public MainView() {
         initComponents();
-        //listarAlunos();
-        //listarCursos();
+        listarAlunos();
+        listarCursos();
+        listarCursoAluno();
     }
     
     /**
@@ -516,7 +517,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnPesquisarMatriculaActionPerformed
 
     private void btnNovoMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoMatriculaActionPerformed
-        
+        salvarNovaMatricula();
     }//GEN-LAST:event_btnNovoMatriculaActionPerformed
 
     private void btnExcluirMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirMatriculaActionPerformed
@@ -559,19 +560,30 @@ public class MainView extends javax.swing.JFrame {
     }
     
     /**
-     * Método para salvar um aluno.
+     * Método para abrir a tela de cadastro de um novo aluno.
      */
     private void salvarNovoAluno() {
         editarSalvar = "salvar";
         new AlunoView(this).setVisible(true);
+        this.setEnabled(false);
     }
     
     /**
-     * Método para salvar um curso.
+     * Método para abrir a tela de cadastro de um novo curso.
      */
     private void salvarNovoCurso() {
         editarSalvar = "salvar";
         new CursoView(this).setVisible(true);
+        this.setEnabled(false);
+    }
+    
+    /**
+     * Método para abrir a tela de cadastro de um nova matrícula.
+     */
+    private void salvarNovaMatricula() {
+        editarSalvar = "salvar";
+        new MatriculaView(this).setVisible(true);
+        this.setEnabled(false);
     }
     
     /**
@@ -677,19 +689,28 @@ public class MainView extends javax.swing.JFrame {
     /**
      * Lista alunos vinculados a cursos no banco de dados.
      */
-    private void listarCursoAluno() {
-        listaCursoAlunoModel = (ArrayList<CursoAlunoModel>) cursoAlunoController.retornarListarCursoAlunosController();
-        DefaultTableModel tabela = (DefaultTableModel) jtbMatricula.getModel();
-        tabela.setNumRows(0);
+    public void listarCursoAluno() {
+    listaCursoAlunoModel = (ArrayList<CursoAlunoModel>) cursoAlunoController.retornarListarCursoAlunosController();
+    DefaultTableModel tabela = (DefaultTableModel) jtbMatricula.getModel();
+    tabela.setNumRows(0);
 
-        int contador = listaCursoAlunoModel.size();
-        for (int c = 0; c < contador; c++) {
-            tabela.addRow(new Object[]{
-                listaCursoAlunoModel.get(c).getCodigoCursoAluno(),
-                listaCursoAlunoModel.get(c).getCodigoAluno()
-            });
-        }
+    int contador = listaCursoAlunoModel.size();
+    for (int c = 0; c < contador; c++) {
+        AlunoModel alunoModel = listaCursoAlunoModel.get(c).getCodigoAluno();
+        CursoModel cursoModel = listaCursoAlunoModel.get(c).getCodigoCurso();
+        
+        Long codigoAluno = alunoModel.getCodigoAluno();
+        String nomeAluno = alunoModel.getNomeAluno();
+        String nomeCurso = cursoModel.getDescricaoCurso();
+        
+        tabela.addRow(new Object[]{
+            listaCursoAlunoModel.get(c).getCodigoCursoAluno(),
+            codigoAluno,
+            nomeAluno,
+            nomeCurso
+        });
     }
+}
     
     public void listarAlunosPorNome(String nome) {
         listaAlunoModel = (ArrayList<AlunoModel>) alunoController.retornarListarAlunoNomeController(nome);

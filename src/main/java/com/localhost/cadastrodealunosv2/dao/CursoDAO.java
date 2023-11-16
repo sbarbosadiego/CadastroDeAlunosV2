@@ -94,7 +94,7 @@ public class CursoDAO extends Conexao {
     
     /**
      * Retorna a 
-     * @param nome
+     * @param curso
      * @return 
      */
     public List<CursoModel> retornarListaCursoNome(String curso) {
@@ -110,6 +110,7 @@ public class CursoDAO extends Conexao {
         cursoModel = entityManager
                 .createQuery("SELECT u FROM cursos u WHERE u.descricaoCurso LIKE :curso", CursoModel.class)
                 .setParameter("curso", "%" + curso + "%")
+                .setMaxResults(1)
                 .getSingleResult();
         return cursoModel;
     }

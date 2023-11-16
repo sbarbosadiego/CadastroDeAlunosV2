@@ -7,9 +7,10 @@ import java.util.List;
  * @author Diego Barbosa da Silva
  */
 public class CursoAlunoDAO extends Conexao {
-    
+
     /**
      * Faz o insert de um novo registro de matrícula.
+     *
      * @param cursoAluno
      * @return int
      */
@@ -24,9 +25,10 @@ public class CursoAlunoDAO extends Conexao {
             return 0;
         }
     }
-    
+
     /**
      * Atualiza o registro de matrícula.
+     *
      * @param aluno
      * @return boolean
      */
@@ -41,9 +43,10 @@ public class CursoAlunoDAO extends Conexao {
             return false;
         }
     }
-    
+
     /**
      * Deleta o registro de matrícula.
+     *
      * @param id
      * @return boolean
      */
@@ -62,9 +65,10 @@ public class CursoAlunoDAO extends Conexao {
             return false;
         }
     }
-    
+
     /**
      * Retorna o registro de um matrícula.
+     *
      * @param id
      * @return AlunoModel
      */
@@ -79,9 +83,10 @@ public class CursoAlunoDAO extends Conexao {
         }
         return cursoAlunoModel;
     }
-    
+
     /**
      * Retorna uma lista de registro de alunos.
+     *
      * @return List<AlunoModel>
      */
     public List<CursoAlunoModel> retornarListaCursoAluno() {
@@ -90,6 +95,5 @@ public class CursoAlunoDAO extends Conexao {
                 .getResultList();
         return cursoAlunoModel;
     }
-    
-    
+
 }

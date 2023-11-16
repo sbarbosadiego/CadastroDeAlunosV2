@@ -31,14 +31,18 @@ public class MatriculaView extends javax.swing.JFrame {
     CursoAlunoModel cursoAlunoModel;
     CursoAlunoController cursoAlunoController = new CursoAlunoController();
     
+    // Tela
+    private MainView mainView;
+    
     // Outros
     int Enter = 0;
 
     /**
      * Creates new form MatriculaView
      */
-    public MatriculaView() {
+    public MatriculaView(MainView mainView) {
         initComponents();
+        this.mainView = mainView;
         listaAluno = new DefaultListModel();
         listaCurso = new DefaultListModel();
         listaPesquisaAluno.setModel(listaAluno);
@@ -46,7 +50,11 @@ public class MatriculaView extends javax.swing.JFrame {
         listaPesquisaAluno.setVisible(false);
         listaPesquisaCurso.setVisible(false);
     }
-
+    
+    public MatriculaView() {
+        
+    }
+        
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -67,8 +75,8 @@ public class MatriculaView extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Matrícula");
-        setMinimumSize(new java.awt.Dimension(530, 200));
-        setPreferredSize(new java.awt.Dimension(540, 200));
+        setMinimumSize(new java.awt.Dimension(540, 200));
+        setPreferredSize(new java.awt.Dimension(540, 143));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -105,7 +113,7 @@ public class MatriculaView extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel2.setText("Aluno:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 6, -1, -1));
 
         jtfNomeCurso.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jtfNomeCurso.addActionListener(new java.awt.event.ActionListener() {
@@ -122,7 +130,7 @@ public class MatriculaView extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jLabel3.setText("Curso:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(267, 6, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(268, 6, -1, -1));
 
         btnSalvarMatricula.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnSalvarMatricula.setText("Salvar");
@@ -157,11 +165,18 @@ public class MatriculaView extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfNomeCursoActionPerformed
 
     private void btnSalvarMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarMatriculaActionPerformed
-        salvarMatricula();
+        if (mainView.editarSalvar.equals("salvar")) {
+            salvarMatricula();
+            dispose();
+            mainView.setEnabled(true);
+        } else if (mainView.editarSalvar.equals("editar")) {
+            //editarMatricula();
+        }
     }//GEN-LAST:event_btnSalvarMatriculaActionPerformed
 
     private void btnCancelarMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarMatriculaActionPerformed
-        // TODO add your handling code here:
+        dispose();
+        mainView.setEnabled(true);
     }//GEN-LAST:event_btnCancelarMatriculaActionPerformed
 
     private void listaPesquisaAlunoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listaPesquisaAlunoMousePressed
@@ -234,6 +249,7 @@ public class MatriculaView extends javax.swing.JFrame {
             if (cursoAlunoController.salvarAlunoController(cursoAlunoModel) > 0) {
                 JOptionPane.showMessageDialog(null, "Matrícula cadastrado com sucesso", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);
+                mainView.listarCursoAluno();
             } else {
                 JOptionPane.showMessageDialog(null, "Matrícula não cadastrada!", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);
@@ -241,9 +257,7 @@ public class MatriculaView extends javax.swing.JFrame {
         }
     }
     
-    /**
-     * Recupera o nome e dados de aluno ao clicar na lista de pesquisa dinâmica.
-     */
+    // Métodos para funcionamento da lista dinâminca na pesquisa de alunos
     private void recuperarPesquisaAluno() {
         int linha = listaPesquisaAluno.getSelectedIndex();
         String nome = listaPesquisaAluno.getSelectedValue();
@@ -251,19 +265,6 @@ public class MatriculaView extends javax.swing.JFrame {
         alunoModel = alunoController.retornarAlunoNomeController(nome);
     }
     
-    /**
-     * Recupera o nome e dados de curso ao clicar na lista de pesquisa dinâmica.
-     */
-    private void recuperarPesquisaCurso() {
-        int linha = listaPesquisaCurso.getSelectedIndex();
-        String curso = listaPesquisaCurso.getSelectedValue();
-        jtfNomeCurso.setText(curso);
-        //cursoModel = controllerCurso.retornarCursoNomeController(curso);
-    }
-    
-    /**
-     * Lista os aluno na pesquisa dinâmica na tela de matrícula.
-     */
     private void listarPesquisaAluno() {
         String nomeAluno = jtfNomeAluno.getText();
         listaModelPesquisaAlunos = (ArrayList<AlunoModel>) alunoController.retornarListarAlunoNomeController(nomeAluno);
@@ -278,11 +279,16 @@ public class MatriculaView extends javax.swing.JFrame {
         }
     }
     
-    /**
-     * Lista os curso na pesquisa dinâmica na tela de matrícula.
-     */
+    // Métotos para funcionamento da lista dinâmica na pesquisa de cursos
+    private void recuperarPesquisaCurso() {
+        int linha = listaPesquisaCurso.getSelectedIndex();
+        String curso = listaPesquisaCurso.getSelectedValue();
+        jtfNomeCurso.setText(curso);
+        cursoModel = cursoController.retornarCursoNomeController(curso);
+    }
+    
     private void listarPesquisaCurso() {
-        String nomeCurso = jtfNomeAluno.getText();
+        String nomeCurso = jtfNomeCurso.getText();
         listaModelPesquisaCursos = (ArrayList<CursoModel>) cursoController.retornarListarCursoNomeController(nomeCurso);
         listaCurso.removeAllElements();
         for (int c = 0; c < listaModelPesquisaCursos.size(); c++) {

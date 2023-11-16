@@ -146,6 +146,7 @@ public class AlunoView extends javax.swing.JFrame {
         if (mainView.editarSalvar.equals("salvar")) {
             salvarAluno();
             dispose();
+            mainView.setEnabled(true);
         } else if (mainView.editarSalvar.equals("editar")) {
             editarAluno();
         }
@@ -157,6 +158,7 @@ public class AlunoView extends javax.swing.JFrame {
 
     private void btnCancelarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarAlunoActionPerformed
         dispose();
+        mainView.setEnabled(true);
     }//GEN-LAST:event_btnCancelarAlunoActionPerformed
 
     private void jtfIdAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfIdAlunoActionPerformed
@@ -232,6 +234,7 @@ public class AlunoView extends javax.swing.JFrame {
                         JOptionPane.INFORMATION_MESSAGE);
                 mainView.listarAlunos();
                 dispose();
+                mainView.setEnabled(true);
             } else {
                 JOptionPane.showMessageDialog(null, "Aluno não atualizado", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);

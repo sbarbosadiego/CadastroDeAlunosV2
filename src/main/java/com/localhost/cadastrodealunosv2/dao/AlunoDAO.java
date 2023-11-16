@@ -109,6 +109,7 @@ public class AlunoDAO extends Conexao {
         alunoModel = entityManager
                 .createQuery("SELECT u FROM alunos u WHERE u.nomeAluno LIKE :nome", AlunoModel.class)
                 .setParameter("nome", "%" + nome + "%")
+                .setMaxResults(1)
                 .getSingleResult();
         return alunoModel;
     }
