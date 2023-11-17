@@ -1,5 +1,6 @@
 package com.localhost.cadastrodealunosv2.model;
 
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 /**
  * @author Diego Barbosa da Silva
@@ -28,6 +30,10 @@ public class CursoAlunoModel {
     @ManyToOne
     @JoinColumn(name = "fk_curso", referencedColumnName = "pk_codigo_curso")
     private CursoModel codigoCurso;
+    
+    @CreationTimestamp
+    @Column(name = "data_cadastro")
+    private LocalDateTime dataCriacao;
     
 
     public CursoAlunoModel() {

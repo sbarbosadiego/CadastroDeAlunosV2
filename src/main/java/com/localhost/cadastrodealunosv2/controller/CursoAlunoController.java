@@ -11,11 +11,11 @@ public class CursoAlunoController {
     
     private CursoAlunoDAO cursoAlunoDao = new CursoAlunoDAO();
     
-    public int salvarAlunoController(CursoAlunoModel cursoAluno) {
+    public int salvarCursoAlunoController(CursoAlunoModel cursoAluno) {
         return this.cursoAlunoDao.cadastrarCursoAluno(cursoAluno);
     }
     
-    public boolean atualizarAlunoController(CursoAlunoModel cursoAluno) {
+    public boolean atualizarCursoAlunoController(CursoAlunoModel cursoAluno) {
         return this.cursoAlunoDao.atualizarCursoAluno(cursoAluno);
     }
     

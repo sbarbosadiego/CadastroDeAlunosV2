@@ -14,26 +14,26 @@ import javax.swing.JOptionPane;
  * @author Diego Barbosa da Silva
  */
 public class MatriculaView extends javax.swing.JFrame {
-    
+
     // Aluno
     AlunoModel alunoModel = new AlunoModel();
     AlunoController alunoController = new AlunoController();
     ArrayList<AlunoModel> listaModelPesquisaAlunos = new ArrayList<>();
     DefaultListModel listaAluno;
-    
+
     // Curso
     CursoModel cursoModel = new CursoModel();
     CursoController cursoController = new CursoController();
     ArrayList<CursoModel> listaModelPesquisaCursos = new ArrayList<>();
     DefaultListModel listaCurso;
-    
+
     // CursoAluno
     CursoAlunoModel cursoAlunoModel;
     CursoAlunoController cursoAlunoController = new CursoAlunoController();
-    
+
     // Tela
     private MainView mainView;
-    
+
     // Outros
     int Enter = 0;
 
@@ -50,11 +50,11 @@ public class MatriculaView extends javax.swing.JFrame {
         listaPesquisaAluno.setVisible(false);
         listaPesquisaCurso.setVisible(false);
     }
-    
+
     public MatriculaView() {
-        
+
     }
-        
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -170,7 +170,7 @@ public class MatriculaView extends javax.swing.JFrame {
             dispose();
             mainView.setEnabled(true);
         } else if (mainView.editarSalvar.equals("editar")) {
-            //editarMatricula();
+            editarMatricula();
         }
     }//GEN-LAST:event_btnSalvarMatriculaActionPerformed
 
@@ -190,7 +190,7 @@ public class MatriculaView extends javax.swing.JFrame {
     }//GEN-LAST:event_listaPesquisaCursoMousePressed
 
     private void jtfNomeAlunoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNomeAlunoKeyReleased
-        if (Enter == 0 ) {
+        if (Enter == 0) {
             listarPesquisaAluno();
         } else {
             Enter = 0;
@@ -198,7 +198,7 @@ public class MatriculaView extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfNomeAlunoKeyReleased
 
     private void jtfNomeCursoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNomeCursoKeyReleased
-        if (Enter == 0 ) {
+        if (Enter == 0) {
             listarPesquisaCurso();
         } else {
             Enter = 0;
@@ -239,24 +239,49 @@ public class MatriculaView extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void salvarMatricula() {
         if (jtfNomeAluno.getText().isEmpty() || jtfNomeCurso.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo vazio!", "ATENÇÃO",
                     JOptionPane.WARNING_MESSAGE);
         } else {
             cursoAlunoModel = new CursoAlunoModel(alunoModel, cursoModel);
-            if (cursoAlunoController.salvarAlunoController(cursoAlunoModel) > 0) {
+            if (cursoAlunoController.salvarCursoAlunoController(cursoAlunoModel) > 0) {
                 JOptionPane.showMessageDialog(null, "Matrícula cadastrado com sucesso", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);
                 mainView.listarCursoAluno();
             } else {
-                JOptionPane.showMessageDialog(null, "Matrícula não cadastrada!", "ATENÇÃO",
+                JOptionPane.showMessageDialog(null, "Matrícula não efetuada!", "ATENÇÃO",
                         JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }
-    
+
+    public void editarMatricula() {
+        if (jtfNomeCurso.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Campo vazio!", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
+        } else if (jtfNomeCurso.getText().length() >= 50) {
+            JOptionPane.showMessageDialog(null, "Campo nome excede o limite de 50 caracteres!", "ATENÇÃO",
+                    JOptionPane.WARNING_MESSAGE);
+        } else {
+            alunoModel = alunoController.retornarAlunoNomeController(jtfNomeAluno.getText());
+            cursoModel = cursoController.retornarCursoNomeController(jtfNomeCurso.getText());
+            this.cursoAlunoModel.setCodigoAluno(alunoModel);
+            this.cursoAlunoModel.setCodigoCurso(cursoModel);
+            if (cursoAlunoController.atualizarCursoAlunoController(cursoAlunoModel)) {
+                JOptionPane.showMessageDialog(null, "Matrícula atualizada com sucesso", "ATENÇÃO",
+                        JOptionPane.INFORMATION_MESSAGE);
+                mainView.listarCursoAluno();
+                dispose();
+                mainView.setEnabled(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Matrícula não atualizada", "ATENÇÃO",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }
+
     // Métodos para funcionamento da lista dinâminca na pesquisa de alunos
     private void recuperarPesquisaAluno() {
         int linha = listaPesquisaAluno.getSelectedIndex();
@@ -264,7 +289,7 @@ public class MatriculaView extends javax.swing.JFrame {
         jtfNomeAluno.setText(nome);
         alunoModel = alunoController.retornarAlunoNomeController(nome);
     }
-    
+
     private void listarPesquisaAluno() {
         String nomeAluno = jtfNomeAluno.getText();
         listaModelPesquisaAlunos = (ArrayList<AlunoModel>) alunoController.retornarListarAlunoNomeController(nomeAluno);
@@ -278,7 +303,7 @@ public class MatriculaView extends javax.swing.JFrame {
             listaPesquisaAluno.setVisible(true);
         }
     }
-    
+
     // Métotos para funcionamento da lista dinâmica na pesquisa de cursos
     private void recuperarPesquisaCurso() {
         int linha = listaPesquisaCurso.getSelectedIndex();
@@ -286,7 +311,7 @@ public class MatriculaView extends javax.swing.JFrame {
         jtfNomeCurso.setText(curso);
         cursoModel = cursoController.retornarCursoNomeController(curso);
     }
-    
+
     private void listarPesquisaCurso() {
         String nomeCurso = jtfNomeCurso.getText();
         listaModelPesquisaCursos = (ArrayList<CursoModel>) cursoController.retornarListarCursoNomeController(nomeCurso);
@@ -300,7 +325,15 @@ public class MatriculaView extends javax.swing.JFrame {
             listaPesquisaCurso.setVisible(true);
         }
     }
-    
+
+    public void setCursoAlunoModel(CursoAlunoModel matricula) {
+        this.cursoAlunoModel = matricula;
+        this.alunoModel = matricula.getCodigoAluno();
+        this.cursoModel = matricula.getCodigoCurso();
+        jtfNomeAluno.setText(alunoModel.getNomeAluno());
+        jtfNomeCurso.setText(cursoModel.getDescricaoCurso());
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelarMatricula;

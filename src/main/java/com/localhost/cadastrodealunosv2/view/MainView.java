@@ -321,16 +321,17 @@ public class MainView extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Curso", telaCurso);
 
+        jtbMatricula.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jtbMatricula.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Matrícula", "Cód. Aluno", "Aluno", "Curso"
+                "Matrícula", "Cód. Aluno", "Aluno", "Curso", "Data Cadastro"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -501,7 +502,8 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirCursoActionPerformed
 
     private void btnEditarMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarMatriculaActionPerformed
-        // TODO add your handling code here:
+        editarSalvar = "editar";
+        editarMatricula();
     }//GEN-LAST:event_btnEditarMatriculaActionPerformed
 
     private void jtfPesquisarMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfPesquisarMatriculaActionPerformed
@@ -509,7 +511,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_jtfPesquisarMatriculaActionPerformed
 
     private void btnAtualizarTabelaMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarTabelaMatriculaActionPerformed
-        // TODO add your handling code here:
+        listarCursoAluno();
     }//GEN-LAST:event_btnAtualizarTabelaMatriculaActionPerformed
 
     private void btnPesquisarMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarMatriculaActionPerformed
@@ -521,7 +523,7 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoMatriculaActionPerformed
 
     private void btnExcluirMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirMatriculaActionPerformed
-        // TODO add your handling code here:
+        excluirMatricula();
     }//GEN-LAST:event_btnExcluirMatriculaActionPerformed
 
     /**
@@ -618,6 +620,19 @@ public class MainView extends javax.swing.JFrame {
         }
     }
     
+    private void editarMatricula() {
+        int linha = jtbMatricula.getSelectedRow();
+        try {
+            Long codigoMatricula = (Long) jtbMatricula.getValueAt(linha, 0);
+            cursoAlunoModel = cursoAlunoController.retornarCursoAlunoController(codigoMatricula);
+            MatriculaView matriculaView = new MatriculaView(this);
+            matriculaView.setCursoAlunoModel(cursoAlunoModel);
+            matriculaView.setVisible(true);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
+        }
+    }
+    
     private void excluirAluno() {
         int linha = jtbAluno.getSelectedRow();
         Long codigoAluno = (Long) jtbAluno.getValueAt(linha, 0);
@@ -643,6 +658,22 @@ public class MainView extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Curso excluído", "ATENÇÃO",
                         JOptionPane.WARNING_MESSAGE);
                 listarCursos();
+            } else {
+                JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+    
+    private void excluirMatricula() {
+        int linha = jtbMatricula.getSelectedRow();
+        Long codigoMatricula = (Long) jtbMatricula.getValueAt(linha, 0);
+        if (JOptionPane.showConfirmDialog(this, "Excluir matricula?", "Excluir",
+                JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+            if (cursoAlunoController.excluirCursoAlunoController(codigoMatricula)) {
+                JOptionPane.showMessageDialog(this, "Matrícula excluída", "ATENÇÃO",
+                        JOptionPane.WARNING_MESSAGE);
+                listarCursoAluno();
             } else {
                 JOptionPane.showMessageDialog(this, "Erro de exclusão", "ERRO",
                         JOptionPane.ERROR_MESSAGE);
@@ -707,7 +738,8 @@ public class MainView extends javax.swing.JFrame {
             listaCursoAlunoModel.get(c).getCodigoCursoAluno(),
             codigoAluno,
             nomeAluno,
-            nomeCurso
+            nomeCurso,
+            listaCursoAlunoModel.get(c).getDataCriacao().format(DateTimeFormatter.ISO_LOCAL_DATE)
         });
     }
 }

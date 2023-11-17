@@ -32,10 +32,10 @@ public class CursoAlunoDAO extends Conexao {
      * @param aluno
      * @return boolean
      */
-    public boolean atualizarCursoAluno(CursoAlunoModel aluno) {
+    public boolean atualizarCursoAluno(CursoAlunoModel matricula) {
         try {
             super.conectar();
-            entityManager.merge(aluno);
+            entityManager.merge(matricula);
             super.desconectar();
             return true;
         } catch (Exception e) {

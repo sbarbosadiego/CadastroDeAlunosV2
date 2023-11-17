@@ -109,7 +109,7 @@ public class CursoDAO extends Conexao {
         CursoModel cursoModel = new CursoModel();
         cursoModel = entityManager
                 .createQuery("SELECT u FROM cursos u WHERE u.descricaoCurso LIKE :curso", CursoModel.class)
-                .setParameter("curso", "%" + curso + "%")
+                .setParameter("curso", "%" + curso)
                 .setMaxResults(1)
                 .getSingleResult();
         return cursoModel;

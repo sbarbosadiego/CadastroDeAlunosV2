@@ -28,9 +28,43 @@ public class Teste {
         
         // CursoAluno
         //CursoAlunoModel matricula = new CursoAlunoModel(modelAluno, modelCurso);
-        //System.out.println(matricula.toString());
+        CursoAlunoModel matricula = new CursoAlunoModel();
         
-        //CursoAlunoDAO matriculaDao = new CursoAlunoDAO();
+        
+        CursoAlunoDAO matriculaDao = new CursoAlunoDAO();
+        
+        /**
+         * Primeiro é feito a consulta para receber as informações no objeto matricula,
+         * em seguida pelo objeto da matrícula é passado as informações aos objetos de aluno e curso.
+         */
+        matricula = matriculaDao.retornarCursoAluno(4L);
+        modelAluno = matricula.getCodigoAluno();
+        modelCurso = matricula.getCodigoCurso();
+        System.out.println(matricula.toString() + "Inicio da edição");
+        System.out.println(modelAluno.toString() + "Inicio da edição");
+        System.out.println(modelCurso.toString() + "Inicio da edição");
+        
+        /**
+         * Realizado uma nova consulta que utiliza o método para encontrar um curso pelo nome,
+         * dessa forma é atribuído um outro curso ao objeto.
+         */
+        modelCurso = cursoDao.retornarCursoNome("javascript");
+        System.out.println(modelCurso.toString() + "Editado");
+        
+        // Atribuído o objeto com o curso atualizado novamente a matrícula.
+        matricula.setCodigoCurso(modelCurso);
+        System.out.println(matricula.toString() + "Pós edição");
+        
+        matriculaDao.atualizarCursoAluno(matricula);
+        
+        
+        List<CursoAlunoModel> lista = new ArrayList<>();
+        lista = matriculaDao.retornarListaCursoAluno();
+        
+        for (CursoAlunoModel matriculas: lista) {
+            System.out.println(matriculas.toString());
+        }
+        
         //matriculaDao.cadastrarCursoAluno(matricula);
         //matriculaDao.excluirCursoAluno(5L);
         
@@ -52,14 +86,14 @@ public class Teste {
         }
         */
         
-        
+        /*
         List<CursoModel> lista = new ArrayList<>();
         lista = cursoDao.retornarListaCursoNome("java");
         
         for (CursoModel aluno: lista) {
             System.out.println(aluno.toString());
         }
-        
+        */
         
         
     }
