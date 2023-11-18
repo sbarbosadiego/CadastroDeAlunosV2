@@ -3,14 +3,18 @@ package com.localhost.cadastrodealunosv2.dao;
 import static com.localhost.cadastrodealunosv2.dao.Conexao.entityManager;
 import com.localhost.cadastrodealunosv2.model.CursoModel;
 import java.util.List;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.swing.JOptionPane;
 
 /**
  * @author Diego Barbosa da Silva
  */
 public class CursoDAO extends Conexao {
-    
+
     /**
      * Faz o insert de um novo registro de curso.
+     *
      * @param curso
      * @return int
      */
@@ -21,13 +25,14 @@ public class CursoDAO extends Conexao {
             super.desconectar();
             return 1;
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return 0;
         }
     }
-    
+
     /**
      * Atualiza o registro de um curso.
+     *
      * @param curso
      * @return boolean
      */
@@ -38,13 +43,14 @@ public class CursoDAO extends Conexao {
             super.desconectar();
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return false;
         }
     }
-    
+
     /**
      * Deleta o registro de um curso.
+     *
      * @param id
      * @return boolean
      */
@@ -59,13 +65,14 @@ public class CursoDAO extends Conexao {
             super.desconectar();
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return false;
         }
     }
-    
+
     /**
      * Retorna o registro de um curso.
+     *
      * @param id
      * @return CursoModel
      */
@@ -76,43 +83,72 @@ public class CursoDAO extends Conexao {
             cursoModel = entityManager.find(CursoModel.class, id);
             super.desconectar();
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
         return cursoModel;
     }
-    
+
     /**
-     * Retorna uma lista de registro de cursos.
-     * @return List<CursoModel>
+     * Retorna uma lista geral de registro de cursos.
+     *
+     * @return List
      */
     public List<CursoModel> retornarListaCurso() {
-        List<CursoModel> listaCursos = entityManager
-                .createQuery("SELECT u FROM cursos u", CursoModel.class)
-                .getResultList();
-        return listaCursos;
+        try {
+            List<CursoModel> listaCursos = entityManager
+                    .createQuery("SELECT u FROM cursos u", CursoModel.class)
+                    .getResultList();
+            return listaCursos;
+        } catch (NoResultException | NonUniqueResultException e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível retornar resultado para consulta");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return null;
     }
-    
+
     /**
-     * Retorna a 
+     * Retorna uma lista de cursos pela nome.
+     *
      * @param curso
-     * @return 
+     * @return List
      */
     public List<CursoModel> retornarListaCursoNome(String curso) {
-        List<CursoModel> listaCursos = entityManager
-                .createQuery("SELECT u FROM cursos u WHERE u.descricaoCurso LIKE :curso", CursoModel.class)
-                .setParameter("curso", "%" + curso + "%")
-                .getResultList();
-        return listaCursos;
+        try {
+            List<CursoModel> listaCursos = entityManager
+                    .createQuery("SELECT u FROM cursos u WHERE u.descricaoCurso LIKE :curso", CursoModel.class)
+                    .setParameter("curso", "%" + curso + "%")
+                    .getResultList();
+            return listaCursos;
+        } catch (NoResultException | NonUniqueResultException e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível retornar resultado para consulta");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return null;
     }
-    
+
+    /**
+     * Retorna um registro de curso pelo nome.
+     *
+     * @param curso
+     * @return CursoModel
+     */
     public CursoModel retornarCursoNome(String curso) {
         CursoModel cursoModel = new CursoModel();
-        cursoModel = entityManager
-                .createQuery("SELECT u FROM cursos u WHERE u.descricaoCurso LIKE :curso", CursoModel.class)
-                .setParameter("curso", "%" + curso)
-                .setMaxResults(1)
-                .getSingleResult();
-        return cursoModel;
+        try {
+            cursoModel = entityManager
+                    .createQuery("SELECT u FROM cursos u WHERE u.descricaoCurso LIKE :curso", CursoModel.class)
+                    .setParameter("curso", "%" + curso)
+                    .setMaxResults(1)
+                    .getSingleResult();
+            return cursoModel;
+        } catch (NoResultException | NonUniqueResultException e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível retornar resultado para consulta");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return null;
     }
-    
+
 }

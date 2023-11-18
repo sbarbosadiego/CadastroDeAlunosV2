@@ -8,35 +8,35 @@ import java.util.List;
  * @author Diego Barbosa da Silva
  */
 public class CursoController {
-    
+
     private CursoDAO cursoDao = new CursoDAO();
-    
+
     public int salvarCursoController(CursoModel curso) {
         return this.cursoDao.cadastrarCurso(curso);
     }
-    
+
     public boolean atualizarCursoController(CursoModel curso) {
         return this.cursoDao.atualizarCurso(curso);
     }
-    
+
     public boolean excluirCursoController(Long id) {
         return this.cursoDao.excluirCurso(id);
     }
-    
+
     public CursoModel retornarCursoController(Long id) {
         return this.cursoDao.retornarCurso(id);
     }
-    
+
     public CursoModel retornarCursoNomeController(String curso) {
         return this.cursoDao.retornarCursoNome(curso);
     }
-    
+
     public List<CursoModel> retornarListarCursosController() {
         return this.cursoDao.retornarListaCurso();
     }
-    
+
     public List<CursoModel> retornarListarCursoNomeController(String curso) {
         return this.cursoDao.retornarListaCursoNome(curso);
     }
-    
+
 }

@@ -16,26 +16,26 @@ import org.hibernate.annotations.CreationTimestamp;
 @Data
 @Entity(name = "cursos")
 public class CursoModel {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pk_codigo_curso")
     private Long codigoCurso;
-    
+
     @Column(name = "curso_ementa")
     private String ementaCurso;
-    
+
     @Column(name = "curso_descricao", length = 50, nullable = false)
     private String descricaoCurso;
-    
+
     @CreationTimestamp
     @Column(name = "data_cadastro")
     private LocalDateTime dataCriacao;
 
     public CursoModel() {
-        
+
     }
-    
+
     public void setDescricaoCurso(String descricao) {
         if (descricao.length() >= 50) {
             throw new CursoException("A descrição não pode ter mais de 50 caracteres.");
@@ -44,5 +44,5 @@ public class CursoModel {
         }
         this.descricaoCurso = descricao;
     }
-    
+
 }

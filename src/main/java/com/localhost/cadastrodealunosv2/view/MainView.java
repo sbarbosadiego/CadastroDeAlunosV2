@@ -85,6 +85,7 @@ public class MainView extends javax.swing.JFrame {
         btnPesquisarMatricula = new javax.swing.JButton();
         btnNovoMatricula = new javax.swing.JButton();
         btnExcluirMatricula = new javax.swing.JButton();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -390,6 +391,14 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
+        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aluno", "Curso", "Matrícula", " " }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout telaMatriculaLayout = new javax.swing.GroupLayout(telaMatricula);
         telaMatricula.setLayout(telaMatriculaLayout);
         telaMatriculaLayout.setHorizontalGroup(
@@ -401,8 +410,10 @@ public class MainView extends javax.swing.JFrame {
                     .addGroup(telaMatriculaLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfPesquisarMatricula)
+                        .addComponent(jtfPesquisarMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnPesquisarMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAtualizarTabelaMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -423,7 +434,8 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jtfPesquisarMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAtualizarTabelaMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesquisarMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnPesquisarMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -526,6 +538,10 @@ public class MainView extends javax.swing.JFrame {
         excluirMatricula();
     }//GEN-LAST:event_btnExcluirMatriculaActionPerformed
 
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -598,6 +614,7 @@ public class MainView extends javax.swing.JFrame {
             alunoModel = alunoController.retornarAlunoController(codigoAluno);
             AlunoView alunoView = new AlunoView(this);
             alunoView.setAlunoModel(alunoModel);
+            this.setEnabled(false);
             alunoView.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
@@ -614,6 +631,7 @@ public class MainView extends javax.swing.JFrame {
             cursoModel = cursoController.retornarCursoController(codigoCurso);
             CursoView cursoView = new CursoView(this);
             cursoView.setCursoModel(cursoModel);
+            this.setEnabled(false);
             cursoView.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
@@ -627,6 +645,7 @@ public class MainView extends javax.swing.JFrame {
             cursoAlunoModel = cursoAlunoController.retornarCursoAlunoController(codigoMatricula);
             MatriculaView matriculaView = new MatriculaView(this);
             matriculaView.setCursoAlunoModel(cursoAlunoModel);
+            this.setEnabled(false);
             matriculaView.setVisible(true);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
@@ -790,6 +809,7 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton btnPesquisarAluno;
     private javax.swing.JButton btnPesquisarCurso;
     private javax.swing.JButton btnPesquisarMatricula;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

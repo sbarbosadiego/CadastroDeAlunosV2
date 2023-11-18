@@ -17,12 +17,12 @@ import org.hibernate.annotations.CreationTimestamp;
 @Data
 @Entity(name = "cursos_alunos")
 public class CursoAlunoModel {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pk_codigo")
     private Long codigoCursoAluno;
-    
+
     @ManyToOne
     @JoinColumn(name = "fk_aluno", referencedColumnName = "pk_codigo_aluno")
     private AlunoModel codigoAluno;
@@ -30,16 +30,15 @@ public class CursoAlunoModel {
     @ManyToOne
     @JoinColumn(name = "fk_curso", referencedColumnName = "pk_codigo_curso")
     private CursoModel codigoCurso;
-    
+
     @CreationTimestamp
     @Column(name = "data_cadastro")
     private LocalDateTime dataCriacao;
-    
 
     public CursoAlunoModel() {
-        
+
     }
-    
+
     public CursoAlunoModel(AlunoModel aluno, CursoModel curso) {
         this.codigoAluno = aluno;
         this.codigoCurso = curso;

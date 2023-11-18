@@ -8,11 +8,11 @@ import javax.swing.JOptionPane;
  * @author Diego Barbosa da Silva
  */
 public class CursoView extends javax.swing.JFrame {
-    
+
     // Aluno
     CursoModel cursoModel = new CursoModel();
     CursoController cursoController = new CursoController();
-    
+
     // Tela
     private MainView mainView;
 
@@ -23,11 +23,10 @@ public class CursoView extends javax.swing.JFrame {
         initComponents();
         this.mainView = mainView;
     }
-    
+
     public CursoView() {
-        
+
     }
-    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -217,7 +216,7 @@ public class CursoView extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void salvarCurso() {
         if (jtfNomeCurso.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo vazio!", "ATENÇÃO",
@@ -238,7 +237,7 @@ public class CursoView extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void editarCurso() {
         if (jtfNomeCurso.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo vazio!", "ATENÇÃO",
@@ -261,7 +260,7 @@ public class CursoView extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public void setCursoModel(CursoModel curso) {
         this.cursoModel = curso;
         jtfIdCurso.setText(this.cursoModel.getCodigoCurso().toString());

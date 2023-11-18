@@ -8,14 +8,14 @@ import javax.swing.JOptionPane;
  * @author Diego Barbosa da Silva
  */
 public class AlunoView extends javax.swing.JFrame {
-    
+
     // Aluno
     AlunoModel alunoModel = new AlunoModel();
     AlunoController alunoController = new AlunoController();
-    
+
     // Tela
     private MainView mainView;
-    
+
     /**
      * Creates new form AlunoView
      */
@@ -25,7 +25,7 @@ public class AlunoView extends javax.swing.JFrame {
     }
 
     public AlunoView() {
-        
+
     }
 
     /**
@@ -199,7 +199,7 @@ public class AlunoView extends javax.swing.JFrame {
             }
         });
     }
-    
+
     private void salvarAluno() {
         if (jtfNomeAluno.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo vazio!", "ATENÇÃO",
@@ -219,7 +219,7 @@ public class AlunoView extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void editarAluno() {
         if (jtfNomeAluno.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Campo vazio!", "ATENÇÃO",
@@ -241,13 +241,13 @@ public class AlunoView extends javax.swing.JFrame {
             }
         }
     }
-    
+
     public void setAlunoModel(AlunoModel aluno) {
         this.alunoModel = aluno;
         jtfIdAluno.setText(this.alunoModel.getCodigoAluno().toString());
         jtfNomeAluno.setText(this.alunoModel.getNomeAluno());
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelarAluno;

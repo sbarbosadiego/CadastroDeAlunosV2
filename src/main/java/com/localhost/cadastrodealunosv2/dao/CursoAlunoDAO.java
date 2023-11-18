@@ -2,6 +2,9 @@ package com.localhost.cadastrodealunosv2.dao;
 
 import com.localhost.cadastrodealunosv2.model.CursoAlunoModel;
 import java.util.List;
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.swing.JOptionPane;
 
 /**
  * @author Diego Barbosa da Silva
@@ -21,7 +24,7 @@ public class CursoAlunoDAO extends Conexao {
             super.desconectar();
             return 1;
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return 0;
         }
     }
@@ -29,8 +32,8 @@ public class CursoAlunoDAO extends Conexao {
     /**
      * Atualiza o registro de matrícula.
      *
-     * @param aluno
-     * @return boolean
+     * @param matricula
+     * @return Boolean
      */
     public boolean atualizarCursoAluno(CursoAlunoModel matricula) {
         try {
@@ -39,7 +42,7 @@ public class CursoAlunoDAO extends Conexao {
             super.desconectar();
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return false;
         }
     }
@@ -48,7 +51,7 @@ public class CursoAlunoDAO extends Conexao {
      * Deleta o registro de matrícula.
      *
      * @param id
-     * @return boolean
+     * @return Boolean
      */
     public boolean excluirCursoAluno(Long id) {
         CursoAlunoModel cursoAlunoModel = new CursoAlunoModel();
@@ -61,13 +64,13 @@ public class CursoAlunoDAO extends Conexao {
             super.desconectar();
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
             return false;
         }
     }
 
     /**
-     * Retorna o registro de um matrícula.
+     * Retorna o registro de uma matrícula.
      *
      * @param id
      * @return AlunoModel
@@ -79,21 +82,28 @@ public class CursoAlunoDAO extends Conexao {
             cursoAlunoModel = entityManager.find(CursoAlunoModel.class, id);
             super.desconectar();
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
         return cursoAlunoModel;
     }
 
     /**
-     * Retorna uma lista de registro de alunos.
+     * Retorna uma lista geral de registro de alunos.
      *
-     * @return List<AlunoModel>
+     * @return List
      */
     public List<CursoAlunoModel> retornarListaCursoAluno() {
-        List<CursoAlunoModel> cursoAlunoModel = entityManager
-                .createQuery("SELECT u FROM cursos_alunos u", CursoAlunoModel.class)
-                .getResultList();
-        return cursoAlunoModel;
+        try {
+            List<CursoAlunoModel> cursoAlunoModel = entityManager
+                    .createQuery("SELECT u FROM cursos_alunos u", CursoAlunoModel.class)
+                    .getResultList();
+            return cursoAlunoModel;
+        } catch (NoResultException | NonUniqueResultException e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível localizar resultado para consulta");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return null;
     }
 
 }

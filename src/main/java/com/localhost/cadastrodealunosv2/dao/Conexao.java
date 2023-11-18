@@ -11,7 +11,7 @@ public class Conexao {
 
     private static EntityManagerFactory factory;
     protected static EntityManager entityManager;
-    
+
     static {
         try {
             factory = Persistence.createEntityManagerFactory("conexao-Mysql");
@@ -20,19 +20,19 @@ public class Conexao {
             e.printStackTrace();
         }
     }
-    
+
     public Conexao conectar() {
         entityManager.getTransaction().begin();
         return this;
     }
-    
+
     public Conexao desconectar() {
         entityManager.getTransaction().commit();
         return this;
     }
-    
+
     public void fecharConexao() {
         entityManager.close();
     }
-    
+
 }
