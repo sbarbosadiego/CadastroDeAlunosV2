@@ -30,5 +30,12 @@ public class CursoAlunoController {
     public List<CursoAlunoModel> retornarListarCursoAlunosController() {
         return this.cursoAlunoDao.retornarListaCursoAluno();
     }
-
+    
+    public List<CursoAlunoModel> retornarListarMatriculaAlunosController(String nome) {
+        return this.cursoAlunoDao.retornarListaMatriculaNomeAluno(nome);
+    }
+    
+    public List<CursoAlunoModel> retornarListarMatriculaCursosController(String nome) {
+        return this.cursoAlunoDao.retornarListaMatriculaNomeCurso(nome);
+    }
 }

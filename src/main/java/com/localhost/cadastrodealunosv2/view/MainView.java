@@ -10,7 +10,11 @@ import com.localhost.cadastrodealunosv2.controller.CursoController;
 import com.localhost.cadastrodealunosv2.model.AlunoModel;
 import com.localhost.cadastrodealunosv2.model.CursoAlunoModel;
 import com.localhost.cadastrodealunosv2.model.CursoModel;
+import java.awt.Desktop;
 import java.awt.EventQueue;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -20,26 +24,26 @@ import javax.swing.table.DefaultTableModel;
  * @author Diego Barbosa da Silva
  */
 public class MainView extends javax.swing.JFrame {
-    
+
     // Aluno
     AlunoModel alunoModel = new AlunoModel();
     AlunoController alunoController = new AlunoController();
     ArrayList<AlunoModel> listaAlunoModel = new ArrayList<>();
-    
+
     // Curso
     CursoModel cursoModel = new CursoModel();
     CursoController cursoController = new CursoController();
     ArrayList<CursoModel> listaCursoModel = new ArrayList<>();
-    
+
     // CursoAluno
     CursoAlunoModel cursoAlunoModel = new CursoAlunoModel();
     CursoAlunoController cursoAlunoController = new CursoAlunoController();
     ArrayList<CursoAlunoModel> listaCursoAlunoModel = new ArrayList<>();
-    
+
     // Funcional
     String editarSalvar;
     int Enter = 0;
-    
+
     /**
      * Creates new form MainView
      */
@@ -49,7 +53,7 @@ public class MainView extends javax.swing.JFrame {
         listarCursos();
         listarCursoAluno();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -90,10 +94,13 @@ public class MainView extends javax.swing.JFrame {
         btnPesquisarMatricula = new javax.swing.JButton();
         btnNovoMatricula = new javax.swing.JButton();
         btnExcluirMatricula = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jcbFiltroMatricula = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuModoEscuro = new javax.swing.JCheckBoxMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        menuGitHub = new javax.swing.JMenuItem();
+        menuLinkedIn = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -138,15 +145,15 @@ public class MainView extends javax.swing.JFrame {
         });
 
         btnAtualizarTabelaAluno.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnAtualizarTabelaAluno.setText("R");
+        btnAtualizarTabelaAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/refresh.png"))); // NOI18N
         btnAtualizarTabelaAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtualizarTabelaAlunoActionPerformed(evt);
             }
         });
 
-        btnPesquisarAluno.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnPesquisarAluno.setText("Pesquisar");
+        btnPesquisarAluno.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        btnPesquisarAluno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/search.png"))); // NOI18N
         btnPesquisarAluno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarAlunoActionPerformed(evt);
@@ -182,7 +189,7 @@ public class MainView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtfPesquisarAluno)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnPesquisarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPesquisarAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAtualizarTabelaAluno, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(telaAlunoLayout.createSequentialGroup()
@@ -253,15 +260,15 @@ public class MainView extends javax.swing.JFrame {
         });
 
         btnAtualizarTabelaCurso.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnAtualizarTabelaCurso.setText("R");
+        btnAtualizarTabelaCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/refresh.png"))); // NOI18N
         btnAtualizarTabelaCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtualizarTabelaCursoActionPerformed(evt);
             }
         });
 
-        btnPesquisarCurso.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnPesquisarCurso.setText("Pesquisar");
+        btnPesquisarCurso.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        btnPesquisarCurso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/search.png"))); // NOI18N
         btnPesquisarCurso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarCursoActionPerformed(evt);
@@ -297,7 +304,7 @@ public class MainView extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jtfPesquisarCurso)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnPesquisarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPesquisarCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAtualizarTabelaCurso, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(telaCursoLayout.createSequentialGroup()
@@ -368,15 +375,15 @@ public class MainView extends javax.swing.JFrame {
         });
 
         btnAtualizarTabelaMatricula.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnAtualizarTabelaMatricula.setText("R");
+        btnAtualizarTabelaMatricula.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/refresh.png"))); // NOI18N
         btnAtualizarTabelaMatricula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtualizarTabelaMatriculaActionPerformed(evt);
             }
         });
 
-        btnPesquisarMatricula.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        btnPesquisarMatricula.setText("Pesquisar");
+        btnPesquisarMatricula.setFont(new java.awt.Font("Segoe UI", 0, 15)); // NOI18N
+        btnPesquisarMatricula.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagens/search.png"))); // NOI18N
         btnPesquisarMatricula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPesquisarMatriculaActionPerformed(evt);
@@ -399,11 +406,11 @@ public class MainView extends javax.swing.JFrame {
             }
         });
 
-        jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aluno", "Curso", "Matrícula", " " }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jcbFiltroMatricula.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jcbFiltroMatricula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Aluno", "Curso", "Matrícula" }));
+        jcbFiltroMatricula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jcbFiltroMatriculaActionPerformed(evt);
             }
         });
 
@@ -418,11 +425,11 @@ public class MainView extends javax.swing.JFrame {
                     .addGroup(telaMatriculaLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtfPesquisarMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jtfPesquisarMatricula)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnPesquisarMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jcbFiltroMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnPesquisarMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAtualizarTabelaMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(telaMatriculaLayout.createSequentialGroup()
@@ -443,7 +450,7 @@ public class MainView extends javax.swing.JFrame {
                     .addComponent(jtfPesquisarMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAtualizarTabelaMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnPesquisarMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jcbFiltroMatricula, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -469,6 +476,26 @@ public class MainView extends javax.swing.JFrame {
         jMenu1.add(menuModoEscuro);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Sobre");
+
+        menuGitHub.setText("GitHub");
+        menuGitHub.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuGitHubActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuGitHub);
+
+        menuLinkedIn.setText("LinkedIn");
+        menuLinkedIn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuLinkedInActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuLinkedIn);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -551,7 +578,13 @@ public class MainView extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAtualizarTabelaMatriculaActionPerformed
 
     private void btnPesquisarMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarMatriculaActionPerformed
-        // TODO add your handling code here:
+        if (jcbFiltroMatricula.getEditor().getItem().equals("Aluno")) {
+            listarMatriculaNomeAluno(jtfPesquisarMatricula.getText());
+        } else if (jcbFiltroMatricula.getEditor().getItem().equals("Curso")) {
+            listarMatriculaNomeCurso(jtfPesquisarMatricula.getText());
+        } else if (jcbFiltroMatricula.getEditor().getItem().equals("Matrícula")) {
+            
+        }
     }//GEN-LAST:event_btnPesquisarMatriculaActionPerformed
 
     private void btnNovoMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoMatriculaActionPerformed
@@ -562,9 +595,9 @@ public class MainView extends javax.swing.JFrame {
         excluirMatricula();
     }//GEN-LAST:event_btnExcluirMatriculaActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jcbFiltroMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbFiltroMatriculaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jcbFiltroMatriculaActionPerformed
 
     private void menuModoEscuroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuModoEscuroActionPerformed
         if (menuModoEscuro.isSelected()) {
@@ -584,6 +617,24 @@ public class MainView extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuModoEscuroActionPerformed
 
+    private void menuGitHubActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuGitHubActionPerformed
+        try {
+            URI link = new URI("https://github.com/sbarbosadiego");
+            Desktop.getDesktop().browse(link);
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_menuGitHubActionPerformed
+
+    private void menuLinkedInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuLinkedInActionPerformed
+        try {
+            URI link = new URI("https://www.linkedin.com/in/diegobarbosad/");
+            Desktop.getDesktop().browse(link);
+        } catch (IOException | URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_menuLinkedInActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -597,7 +648,7 @@ public class MainView extends javax.swing.JFrame {
             }
         });
     }
-    
+
     /**
      * Método para abrir a tela de cadastro de um novo aluno.
      */
@@ -606,7 +657,7 @@ public class MainView extends javax.swing.JFrame {
         new AlunoView(this).setVisible(true);
         this.setEnabled(false);
     }
-    
+
     /**
      * Método para abrir a tela de cadastro de um novo curso.
      */
@@ -615,7 +666,7 @@ public class MainView extends javax.swing.JFrame {
         new CursoView(this).setVisible(true);
         this.setEnabled(false);
     }
-    
+
     /**
      * Método para abrir a tela de cadastro de um nova matrícula.
      */
@@ -624,7 +675,7 @@ public class MainView extends javax.swing.JFrame {
         new MatriculaView(this).setVisible(true);
         this.setEnabled(false);
     }
-    
+
     /**
      * Método para editar um registro de aluno na tabela.
      */
@@ -641,7 +692,7 @@ public class MainView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
         }
     }
-    
+
     /**
      * Método para editar um registro de curso na tabela.
      */
@@ -720,7 +771,7 @@ public class MainView extends javax.swing.JFrame {
             }
         }
     }
-    
+
     /**
      * Método para carregar os aluno na tabela.
      */
@@ -728,7 +779,67 @@ public class MainView extends javax.swing.JFrame {
         listaAlunoModel = (ArrayList<AlunoModel>) alunoController.retornarListarAlunosController();
         DefaultTableModel tabela = (DefaultTableModel) jtbAluno.getModel();
         tabela.setNumRows(0);
+        
+        int contador = listaAlunoModel.size();
+        for (int c = 0; c < contador; c++) {
+            tabela.addRow(new Object[]{
+                listaAlunoModel.get(c).getCodigoAluno(),
+                listaAlunoModel.get(c).getNomeAluno(),
+                listaAlunoModel.get(c).getDataCriacao().format(DateTimeFormatter.ISO_LOCAL_DATE)
+            });
+        }
+    }
 
+    /**
+     * Método apra carregar os cursos na tabela.
+     */
+    public void listarCursos() {
+        listaCursoModel = (ArrayList<CursoModel>) cursoController.retornarListarCursosController();
+        DefaultTableModel tabela = (DefaultTableModel) jtbCurso.getModel();
+        tabela.setNumRows(0);
+        
+        int contador = listaCursoModel.size();
+        for (int c = 0; c < contador; c++) {
+            tabela.addRow(new Object[]{
+                listaCursoModel.get(c).getCodigoCurso(),
+                listaCursoModel.get(c).getDescricaoCurso(),
+                listaCursoModel.get(c).getDataCriacao().format(DateTimeFormatter.ISO_LOCAL_DATE)
+            });
+        }
+    }
+
+    /**
+     * Lista alunos vinculados a cursos no banco de dados.
+     */
+    public void listarCursoAluno() {
+        listaCursoAlunoModel = (ArrayList<CursoAlunoModel>) cursoAlunoController.retornarListarCursoAlunosController();
+        DefaultTableModel tabela = (DefaultTableModel) jtbMatricula.getModel();
+        tabela.setNumRows(0);
+        
+        int contador = listaCursoAlunoModel.size();
+        for (int c = 0; c < contador; c++) {
+            AlunoModel alunoModel = listaCursoAlunoModel.get(c).getCodigoAluno();
+            CursoModel cursoModel = listaCursoAlunoModel.get(c).getCodigoCurso();
+            
+            Long codigoAluno = alunoModel.getCodigoAluno();
+            String nomeAluno = alunoModel.getNomeAluno();
+            String nomeCurso = cursoModel.getDescricaoCurso();
+            
+            tabela.addRow(new Object[]{
+                listaCursoAlunoModel.get(c).getCodigoCursoAluno(),
+                codigoAluno,
+                nomeAluno,
+                nomeCurso,
+                listaCursoAlunoModel.get(c).getDataCriacao().format(DateTimeFormatter.ISO_LOCAL_DATE)
+            });
+        }
+    }
+    
+    public void listarAlunosPorNome(String nome) {
+        listaAlunoModel = (ArrayList<AlunoModel>) alunoController.retornarListarAlunoNomeController(nome);
+        DefaultTableModel tabela = (DefaultTableModel) jtbAluno.getModel();
+        tabela.setNumRows(0);
+        
         int contador = listaAlunoModel.size();
         for (int c = 0; c < contador; c++) {
             tabela.addRow(new Object[]{
@@ -739,14 +850,11 @@ public class MainView extends javax.swing.JFrame {
         }
     }
     
-    /**
-     * Método apra carregar os cursos na tabela.
-     */
-    public void listarCursos() {
-        listaCursoModel = (ArrayList<CursoModel>) cursoController.retornarListarCursosController();
+    public void listarCursosPorNome(String nome) {
+        listaCursoModel = (ArrayList<CursoModel>) cursoController.retornarListarCursoNomeController(nome);
         DefaultTableModel tabela = (DefaultTableModel) jtbCurso.getModel();
         tabela.setNumRows(0);
-
+        
         int contador = listaCursoModel.size();
         for (int c = 0; c < contador; c++) {
             tabela.addRow(new Object[]{
@@ -757,59 +865,50 @@ public class MainView extends javax.swing.JFrame {
         }
     }
     
-    /**
-     * Lista alunos vinculados a cursos no banco de dados.
-     */
-    public void listarCursoAluno() {
-    listaCursoAlunoModel = (ArrayList<CursoAlunoModel>) cursoAlunoController.retornarListarCursoAlunosController();
-    DefaultTableModel tabela = (DefaultTableModel) jtbMatricula.getModel();
-    tabela.setNumRows(0);
-
-    int contador = listaCursoAlunoModel.size();
-    for (int c = 0; c < contador; c++) {
-        AlunoModel alunoModel = listaCursoAlunoModel.get(c).getCodigoAluno();
-        CursoModel cursoModel = listaCursoAlunoModel.get(c).getCodigoCurso();
-        
-        Long codigoAluno = alunoModel.getCodigoAluno();
-        String nomeAluno = alunoModel.getNomeAluno();
-        String nomeCurso = cursoModel.getDescricaoCurso();
-        
-        tabela.addRow(new Object[]{
-            listaCursoAlunoModel.get(c).getCodigoCursoAluno(),
-            codigoAluno,
-            nomeAluno,
-            nomeCurso,
-            listaCursoAlunoModel.get(c).getDataCriacao().format(DateTimeFormatter.ISO_LOCAL_DATE)
-        });
-    }
-}
-    
-    public void listarAlunosPorNome(String nome) {
-        listaAlunoModel = (ArrayList<AlunoModel>) alunoController.retornarListarAlunoNomeController(nome);
-        DefaultTableModel tabela = (DefaultTableModel) jtbAluno.getModel();
+    public void listarMatriculaNomeAluno(String nome) {
+        listaCursoAlunoModel = (ArrayList<CursoAlunoModel>) cursoAlunoController.retornarListarMatriculaAlunosController(nome);
+        DefaultTableModel tabela = (DefaultTableModel) jtbMatricula.getModel();
         tabela.setNumRows(0);
-
-        int contador = listaAlunoModel.size();
+        
+        int contador = listaCursoAlunoModel.size();
         for (int c = 0; c < contador; c++) {
+            AlunoModel alunoModel = listaCursoAlunoModel.get(c).getCodigoAluno();
+            CursoModel cursoModel = listaCursoAlunoModel.get(c).getCodigoCurso();
+            
+            Long codigoAluno = alunoModel.getCodigoAluno();
+            String nomeAluno = alunoModel.getNomeAluno();
+            String nomeCurso = cursoModel.getDescricaoCurso();
+            
             tabela.addRow(new Object[]{
-                listaAlunoModel.get(c).getCodigoAluno(),
-                listaAlunoModel.get(c).getNomeAluno(),
-                listaAlunoModel.get(c).getDataCriacao()
+                listaCursoAlunoModel.get(c).getCodigoCursoAluno(),
+                codigoAluno,
+                nomeAluno,
+                nomeCurso,
+                listaCursoAlunoModel.get(c).getDataCriacao().format(DateTimeFormatter.ISO_LOCAL_DATE)
             });
         }
     }
     
-    public void listarCursosPorNome(String nome) {
-        listaCursoModel = (ArrayList<CursoModel>) cursoController.retornarListarCursoNomeController(nome);
-        DefaultTableModel tabela = (DefaultTableModel) jtbCurso.getModel();
+    public void listarMatriculaNomeCurso(String nome) {
+        listaCursoAlunoModel = (ArrayList<CursoAlunoModel>) cursoAlunoController.retornarListarMatriculaCursosController(nome);
+        DefaultTableModel tabela = (DefaultTableModel) jtbMatricula.getModel();
         tabela.setNumRows(0);
-
-        int contador = listaCursoModel.size();
+        
+        int contador = listaCursoAlunoModel.size();
         for (int c = 0; c < contador; c++) {
+            AlunoModel alunoModel = listaCursoAlunoModel.get(c).getCodigoAluno();
+            CursoModel cursoModel = listaCursoAlunoModel.get(c).getCodigoCurso();
+            
+            Long codigoAluno = alunoModel.getCodigoAluno();
+            String nomeAluno = alunoModel.getNomeAluno();
+            String nomeCurso = cursoModel.getDescricaoCurso();
+            
             tabela.addRow(new Object[]{
-                listaCursoModel.get(c).getCodigoCurso(),
-                listaCursoModel.get(c).getDescricaoCurso(),
-                listaCursoModel.get(c).getDataCriacao()
+                listaCursoAlunoModel.get(c).getCodigoCursoAluno(),
+                codigoAluno,
+                nomeAluno,
+                nomeCurso,
+                listaCursoAlunoModel.get(c).getDataCriacao().format(DateTimeFormatter.ISO_LOCAL_DATE)
             });
         }
     }
@@ -830,22 +929,25 @@ public class MainView extends javax.swing.JFrame {
     private javax.swing.JButton btnPesquisarAluno;
     private javax.swing.JButton btnPesquisarCurso;
     private javax.swing.JButton btnPesquisarMatricula;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JComboBox<String> jcbFiltroMatricula;
     private javax.swing.JTable jtbAluno;
     private javax.swing.JTable jtbCurso;
     private javax.swing.JTable jtbMatricula;
     private javax.swing.JTextField jtfPesquisarAluno;
     private javax.swing.JTextField jtfPesquisarCurso;
     private javax.swing.JTextField jtfPesquisarMatricula;
+    private javax.swing.JMenuItem menuGitHub;
+    private javax.swing.JMenuItem menuLinkedIn;
     private javax.swing.JCheckBoxMenuItem menuModoEscuro;
     private javax.swing.JPanel telaAluno;
     private javax.swing.JPanel telaCurso;

@@ -4,6 +4,7 @@ import com.localhost.cadastrodealunosv2.model.CursoAlunoModel;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
+import javax.persistence.Query;
 import javax.swing.JOptionPane;
 
 /**
@@ -86,7 +87,7 @@ public class CursoAlunoDAO extends Conexao {
         }
         return cursoAlunoModel;
     }
-
+    
     /**
      * Retorna uma lista geral de registro de alunos.
      *
@@ -99,9 +100,45 @@ public class CursoAlunoDAO extends Conexao {
                     .getResultList();
             return cursoAlunoModel;
         } catch (NoResultException | NonUniqueResultException e) {
-            JOptionPane.showMessageDialog(null, "Não foi possível localizar resultado para consulta");
+            JOptionPane.showMessageDialog(null, "Não foi possível localizar resultado para a consulta");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return null;
+    }
+
+    public List<CursoAlunoModel> retornarListaMatriculaNomeAluno(String nome) {
+        try {
+            List<CursoAlunoModel> cursoAlunoModel = entityManager
+                    .createQuery("SELECT m "
+                            + "FROM cursos_alunos m "
+                            + "JOIN m.codigoAluno a "
+                            + "WHERE a.nomeAluno LIKE :nome", CursoAlunoModel.class)
+                    .setParameter("nome", "%" + nome + "%")
+                    .getResultList();
+            return cursoAlunoModel;
+        } catch (NoResultException | NonUniqueResultException e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível localizar resultado para a consulta");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    
+    public List<CursoAlunoModel> retornarListaMatriculaNomeCurso(String nome) {
+        try {
+            List<CursoAlunoModel> cursoAlunoModel = entityManager
+                    .createQuery("SELECT m "
+                            + "FROM cursos_alunos m "
+                            + "JOIN m.codigoCurso c "
+                            + "WHERE c.descricaoCurso LIKE :nome", CursoAlunoModel.class)
+                    .setParameter("nome", "%" + nome + "%")
+                    .getResultList();
+            return cursoAlunoModel;
+        } catch (NoResultException | NonUniqueResultException e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível localizar resultado para a consulta");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return null;
     }

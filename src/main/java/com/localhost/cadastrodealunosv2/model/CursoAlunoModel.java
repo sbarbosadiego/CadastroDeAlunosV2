@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -34,7 +35,7 @@ public class CursoAlunoModel {
     @CreationTimestamp
     @Column(name = "data_cadastro")
     private LocalDateTime dataCriacao;
-
+    
     public CursoAlunoModel() {
 
     }

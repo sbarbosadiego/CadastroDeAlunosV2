@@ -100,7 +100,7 @@ public class AlunoDAO extends Conexao {
                     .getResultList();
             return listaAlunos;
         } catch (NoResultException | NonUniqueResultException e) {
-            JOptionPane.showMessageDialog(null, "Não foi possível retornar resultado para consulta");
+            JOptionPane.showMessageDialog(null, "Não foi possível retornar resultado para a consulta");
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
