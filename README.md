@@ -1,8 +1,7 @@
 # CadastroDeAlunosV2
 
-Projeto de sistema de cadastro de alunos, cursos e matrículas.  
-Este projeto é uma segunda versão do inicial [CadastroDeAlunos](https://github.com/sbarbosadiego/CadastroDeAlunos) em que a conexão ao banco de dados é feita através do JDBC e utilização do padrão MVC (Model, View, Controller), nesta segunda versão do projeto é implementado as mesmas operações CRUD (Create, Read, Update, Delete), utilizando tecnologias como JPA/Hibernate para mapeamento objeto-relacional, Lombok para reduzir a verbosidade do código e o Maven para gerenciamento de dependências e também a adoção do padrão MVC.  
-Com uma interface para uso em Java/Swing, foi alterado a abordagem para o cadastro de aluno, curso e matrícula, para que seja separado da interface de navegação, visando a redução de elementos em tela para simplificar a interação do usuário.
+Projeto de um sistema de cadastro de alunos, cursos e matrículas. Este projeto é uma segunda versão do inicial [CadastroDeAlunos](https://github.com/sbarbosadiego/CadastroDeAlunos) em que a conexão ao banco de dados é feita através do JDBC e utilizado o padrão [MVC](https://pt.wikipedia.org/wiki/MVC) (Model, View, Controller), nesta segunda versão do projeto é implementado as mesmas operações [CRUD](https://pt.wikipedia.org/wiki/CRUD) (Create, Read, Update, Delete), utilizando tecnologias como JPA/Hibernate para mapeamento objeto-relacional, [Lombok](https://projectlombok.org/) para reduzir a verbosidade do código, Maven para gerenciamento de dependências, uso do banco de dados MySQL e também a adoção do padrão MVC.  
+Com uma interface para uso em Java/Swing com [FlatLaf](https://www.formdev.com/flatlaf/), foi alterado a abordagem para o cadastro de aluno, curso e matrícula, para que seja separado da interface de navegação, visando a redução de elementos em tela para simplificar a interação do usuário.
 
 ##
 ### Configurações de Ambiente
@@ -16,7 +15,7 @@ Com uma interface para uso em Java/Swing, foi alterado a abordagem para o cadast
 - NetBeans: [Windows](https://www.youtube.com/watch?v=dmnerOpFj1E) / [Linux](https://www.youtube.com/watch?v=SiPJcbrW9K8")
 
 ### Acesso ao Banco de dados
-Para realizar o acesso ao banco de dados, deve ser acessado o diretório sources\META-INF, e renomeado o arquivo persistenc.xml para persistence.xml, dentro deste informar o usuário de acesso ao banco de dados e senha do mesmo.  
+Para realizar o acesso ao banco de dados, deve ser acessado o diretório resources\META-INF, e renomeado o arquivo persistenc.xml para persistence.xml, dentro deste informar o usuário de acesso ao banco de dados e senha do mesmo.  
 Em seu banco de dados criar uma base de dados com o seguinte nome cadastrodealunosv2, ou copiar e executar o código abaixo:
 <pre>
 CREATE SCHEMA cadastrodealunosv2;
