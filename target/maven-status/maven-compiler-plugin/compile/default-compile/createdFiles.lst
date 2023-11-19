@@ -3,6 +3,7 @@ com\localhost\cadastrodealunosv2\dao\Conexao.class
 com\localhost\cadastrodealunosv2\model\AlunoModel.class
 com\localhost\cadastrodealunosv2\view\AlunoView$4.class
 com\localhost\cadastrodealunosv2\view\MainView$20.class
+com\localhost\cadastrodealunosv2\view\MainView$30.class
 com\localhost\cadastrodealunosv2\view\MainView$17.class
 com\localhost\cadastrodealunosv2\view\MatriculaView$3.class
 com\localhost\cadastrodealunosv2\view\MainView$7.class
@@ -23,10 +24,12 @@ com\localhost\cadastrodealunosv2\controller\CursoController.class
 com\localhost\cadastrodealunosv2\view\MainView$11.class
 com\localhost\cadastrodealunosv2\view\AlunoView.class
 com\localhost\cadastrodealunosv2\view\MainView$26.class
+com\localhost\cadastrodealunosv2\view\MainView$31.class
 com\localhost\cadastrodealunosv2\exception\AlunoException.class
 com\localhost\cadastrodealunosv2\view\MainView$22.class
 com\localhost\cadastrodealunosv2\view\MainView.class
 com\localhost\cadastrodealunosv2\dao\CursoDAO.class
+com\localhost\cadastrodealunosv2\view\MainView$29.class
 com\localhost\cadastrodealunosv2\view\AlunoView$2.class
 com\localhost\cadastrodealunosv2\view\MainView$6.class
 com\localhost\cadastrodealunosv2\view\MainView$14.class
@@ -44,6 +47,7 @@ com\localhost\cadastrodealunosv2\exception\CursoException.class
 com\localhost\cadastrodealunosv2\view\MatriculaView$9.class
 com\localhost\cadastrodealunosv2\view\MainView$5.class
 com\localhost\cadastrodealunosv2\view\MainView$18.class
+com\localhost\cadastrodealunosv2\view\MainView$28.class
 com\localhost\cadastrodealunosv2\view\MainView$16.class
 com\localhost\cadastrodealunosv2\view\MainView$1.class
 com\localhost\cadastrodealunosv2\view\MainView$8.class
@@ -52,10 +56,12 @@ com\localhost\cadastrodealunosv2\view\MainView$21.class
 com\localhost\cadastrodealunosv2\dao\AlunoDAO.class
 com\localhost\cadastrodealunosv2\view\AlunoView$3.class
 com\localhost\cadastrodealunosv2\view\MainView$19.class
+com\localhost\cadastrodealunosv2\view\MainView$32.class
 com\localhost\cadastrodealunosv2\view\MatriculaView$2.class
 com\localhost\cadastrodealunosv2\view\MatriculaView.class
 com\localhost\cadastrodealunosv2\view\CursoView$1.class
 com\localhost\cadastrodealunosv2\view\MainView$4.class
 com\localhost\cadastrodealunosv2\view\MatriculaView$8.class
 com\localhost\cadastrodealunosv2\view\MainView$24.class
+com\localhost\cadastrodealunosv2\view\MainView$27.class
 com\localhost\cadastrodealunosv2\view\CursoView$4.class

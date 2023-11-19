@@ -12,7 +12,7 @@ public class ConsultaMatricula {
         CursoAlunoDAO matriculaDao = new CursoAlunoDAO();
         
         List<CursoAlunoModel> lista = new ArrayList<>();
-        lista = matriculaDao.retornarListaMatriculaNomeCurso("java");
+        lista = matriculaDao.retornarListaMatriculaId(18L);
         
         for (CursoAlunoModel matriculas: lista) {
             

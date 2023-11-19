@@ -38,4 +38,8 @@ public class CursoAlunoController {
     public List<CursoAlunoModel> retornarListarMatriculaCursosController(String nome) {
         return this.cursoAlunoDao.retornarListaMatriculaNomeCurso(nome);
     }
+    
+    public List<CursoAlunoModel> retornarListarMatriculaIdController(Long id) {
+        return this.cursoAlunoDao.retornarListaMatriculaId(id);
+    }
 }

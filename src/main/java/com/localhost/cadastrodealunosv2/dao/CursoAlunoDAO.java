@@ -142,5 +142,22 @@ public class CursoAlunoDAO extends Conexao {
         }
         return null;
     }
+    
+    public List<CursoAlunoModel> retornarListaMatriculaId(Long id) {
+        try {
+            List<CursoAlunoModel> cursoAlunoModel = entityManager
+                    .createQuery("SELECT m "
+                            + "FROM cursos_alunos m "
+                            + "WHERE m.codigoCursoAluno = :id", CursoAlunoModel.class)
+                    .setParameter("id",  id)
+                    .getResultList();
+            return cursoAlunoModel;
+        } catch (NoResultException | NonUniqueResultException e) {
+            JOptionPane.showMessageDialog(null, "Não foi possível localizar resultado para a consulta");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

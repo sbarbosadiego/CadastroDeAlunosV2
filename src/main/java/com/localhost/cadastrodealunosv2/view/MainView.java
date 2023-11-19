@@ -12,6 +12,8 @@ import com.localhost.cadastrodealunosv2.model.CursoAlunoModel;
 import com.localhost.cadastrodealunosv2.model.CursoModel;
 import java.awt.Desktop;
 import java.awt.EventQueue;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -525,6 +527,7 @@ public class MainView extends javax.swing.JFrame {
 
     private void btnAtualizarTabelaAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarTabelaAlunoActionPerformed
         listarAlunos();
+        jtfPesquisarAluno.setText("");
     }//GEN-LAST:event_btnAtualizarTabelaAlunoActionPerformed
 
     private void btnPesquisarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarAlunoActionPerformed
@@ -550,6 +553,7 @@ public class MainView extends javax.swing.JFrame {
 
     private void btnAtualizarTabelaCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarTabelaCursoActionPerformed
         listarCursos();
+        jtfPesquisarCurso.setText("");
     }//GEN-LAST:event_btnAtualizarTabelaCursoActionPerformed
 
     private void btnPesquisarCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarCursoActionPerformed
@@ -575,6 +579,7 @@ public class MainView extends javax.swing.JFrame {
 
     private void btnAtualizarTabelaMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtualizarTabelaMatriculaActionPerformed
         listarCursoAluno();
+        jtfPesquisarMatricula.setText("");
     }//GEN-LAST:event_btnAtualizarTabelaMatriculaActionPerformed
 
     private void btnPesquisarMatriculaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarMatriculaActionPerformed
@@ -583,7 +588,7 @@ public class MainView extends javax.swing.JFrame {
         } else if (jcbFiltroMatricula.getEditor().getItem().equals("Curso")) {
             listarMatriculaNomeCurso(jtfPesquisarMatricula.getText());
         } else if (jcbFiltroMatricula.getEditor().getItem().equals("Matrícula")) {
-            
+            listarMatriculaId(Long.valueOf(jtfPesquisarMatricula.getText()));
         }
     }//GEN-LAST:event_btnPesquisarMatriculaActionPerformed
 
@@ -639,9 +644,9 @@ public class MainView extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
+
         FlatIntelliJLaf.setup();
-        
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new MainView().setVisible(true);
@@ -654,7 +659,14 @@ public class MainView extends javax.swing.JFrame {
      */
     private void salvarNovoAluno() {
         editarSalvar = "salvar";
-        new AlunoView(this).setVisible(true);
+        AlunoView alunoView = new AlunoView(this);
+        alunoView.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                setEnabled(true);
+            }
+        });
+        alunoView.setVisible(true);
         this.setEnabled(false);
     }
 
@@ -663,7 +675,14 @@ public class MainView extends javax.swing.JFrame {
      */
     private void salvarNovoCurso() {
         editarSalvar = "salvar";
-        new CursoView(this).setVisible(true);
+        CursoView cursoView = new CursoView(this);
+        cursoView.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                setEnabled(true);
+            }
+        });
+        cursoView.setVisible(true);
         this.setEnabled(false);
     }
 
@@ -672,7 +691,14 @@ public class MainView extends javax.swing.JFrame {
      */
     private void salvarNovaMatricula() {
         editarSalvar = "salvar";
-        new MatriculaView(this).setVisible(true);
+        MatriculaView matriculaView = new MatriculaView(this);
+        matriculaView.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                setEnabled(true);
+            }
+        });
+        matriculaView.setVisible(true);
         this.setEnabled(false);
     }
 
@@ -685,6 +711,12 @@ public class MainView extends javax.swing.JFrame {
             Long codigoAluno = (Long) jtbAluno.getValueAt(linha, 0);
             alunoModel = alunoController.retornarAlunoController(codigoAluno);
             AlunoView alunoView = new AlunoView(this);
+            alunoView.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    setEnabled(true);
+                }
+            });
             alunoView.setAlunoModel(alunoModel);
             this.setEnabled(false);
             alunoView.setVisible(true);
@@ -702,6 +734,12 @@ public class MainView extends javax.swing.JFrame {
             Long codigoCurso = (Long) jtbCurso.getValueAt(linha, 0);
             cursoModel = cursoController.retornarCursoController(codigoCurso);
             CursoView cursoView = new CursoView(this);
+            cursoView.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    setEnabled(true);
+                }
+            });
             cursoView.setCursoModel(cursoModel);
             this.setEnabled(false);
             cursoView.setVisible(true);
@@ -709,13 +747,19 @@ public class MainView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
         }
     }
-    
+
     private void editarMatricula() {
         int linha = jtbMatricula.getSelectedRow();
         try {
             Long codigoMatricula = (Long) jtbMatricula.getValueAt(linha, 0);
             cursoAlunoModel = cursoAlunoController.retornarCursoAlunoController(codigoMatricula);
             MatriculaView matriculaView = new MatriculaView(this);
+            matriculaView.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    setEnabled(true);
+                }
+            });
             matriculaView.setCursoAlunoModel(cursoAlunoModel);
             this.setEnabled(false);
             matriculaView.setVisible(true);
@@ -723,7 +767,7 @@ public class MainView extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Nenhum registro selecionado");
         }
     }
-    
+
     private void excluirAluno() {
         int linha = jtbAluno.getSelectedRow();
         Long codigoAluno = (Long) jtbAluno.getValueAt(linha, 0);
@@ -739,7 +783,7 @@ public class MainView extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void excluirCurso() {
         int linha = jtbCurso.getSelectedRow();
         Long codigoCurso = (Long) jtbCurso.getValueAt(linha, 0);
@@ -755,7 +799,7 @@ public class MainView extends javax.swing.JFrame {
             }
         }
     }
-    
+
     private void excluirMatricula() {
         int linha = jtbMatricula.getSelectedRow();
         Long codigoMatricula = (Long) jtbMatricula.getValueAt(linha, 0);
@@ -779,7 +823,7 @@ public class MainView extends javax.swing.JFrame {
         listaAlunoModel = (ArrayList<AlunoModel>) alunoController.retornarListarAlunosController();
         DefaultTableModel tabela = (DefaultTableModel) jtbAluno.getModel();
         tabela.setNumRows(0);
-        
+
         int contador = listaAlunoModel.size();
         for (int c = 0; c < contador; c++) {
             tabela.addRow(new Object[]{
@@ -797,7 +841,7 @@ public class MainView extends javax.swing.JFrame {
         listaCursoModel = (ArrayList<CursoModel>) cursoController.retornarListarCursosController();
         DefaultTableModel tabela = (DefaultTableModel) jtbCurso.getModel();
         tabela.setNumRows(0);
-        
+
         int contador = listaCursoModel.size();
         for (int c = 0; c < contador; c++) {
             tabela.addRow(new Object[]{
@@ -815,16 +859,16 @@ public class MainView extends javax.swing.JFrame {
         listaCursoAlunoModel = (ArrayList<CursoAlunoModel>) cursoAlunoController.retornarListarCursoAlunosController();
         DefaultTableModel tabela = (DefaultTableModel) jtbMatricula.getModel();
         tabela.setNumRows(0);
-        
+
         int contador = listaCursoAlunoModel.size();
         for (int c = 0; c < contador; c++) {
             AlunoModel alunoModel = listaCursoAlunoModel.get(c).getCodigoAluno();
             CursoModel cursoModel = listaCursoAlunoModel.get(c).getCodigoCurso();
-            
+
             Long codigoAluno = alunoModel.getCodigoAluno();
             String nomeAluno = alunoModel.getNomeAluno();
             String nomeCurso = cursoModel.getDescricaoCurso();
-            
+
             tabela.addRow(new Object[]{
                 listaCursoAlunoModel.get(c).getCodigoCursoAluno(),
                 codigoAluno,
@@ -834,12 +878,12 @@ public class MainView extends javax.swing.JFrame {
             });
         }
     }
-    
+
     public void listarAlunosPorNome(String nome) {
         listaAlunoModel = (ArrayList<AlunoModel>) alunoController.retornarListarAlunoNomeController(nome);
         DefaultTableModel tabela = (DefaultTableModel) jtbAluno.getModel();
         tabela.setNumRows(0);
-        
+
         int contador = listaAlunoModel.size();
         for (int c = 0; c < contador; c++) {
             tabela.addRow(new Object[]{
@@ -849,12 +893,12 @@ public class MainView extends javax.swing.JFrame {
             });
         }
     }
-    
+
     public void listarCursosPorNome(String nome) {
         listaCursoModel = (ArrayList<CursoModel>) cursoController.retornarListarCursoNomeController(nome);
         DefaultTableModel tabela = (DefaultTableModel) jtbCurso.getModel();
         tabela.setNumRows(0);
-        
+
         int contador = listaCursoModel.size();
         for (int c = 0; c < contador; c++) {
             tabela.addRow(new Object[]{
@@ -864,21 +908,45 @@ public class MainView extends javax.swing.JFrame {
             });
         }
     }
-    
+
     public void listarMatriculaNomeAluno(String nome) {
         listaCursoAlunoModel = (ArrayList<CursoAlunoModel>) cursoAlunoController.retornarListarMatriculaAlunosController(nome);
         DefaultTableModel tabela = (DefaultTableModel) jtbMatricula.getModel();
         tabela.setNumRows(0);
-        
+
         int contador = listaCursoAlunoModel.size();
         for (int c = 0; c < contador; c++) {
             AlunoModel alunoModel = listaCursoAlunoModel.get(c).getCodigoAluno();
             CursoModel cursoModel = listaCursoAlunoModel.get(c).getCodigoCurso();
-            
+
             Long codigoAluno = alunoModel.getCodigoAluno();
             String nomeAluno = alunoModel.getNomeAluno();
             String nomeCurso = cursoModel.getDescricaoCurso();
-            
+
+            tabela.addRow(new Object[]{
+                listaCursoAlunoModel.get(c).getCodigoCursoAluno(),
+                codigoAluno,
+                nomeAluno,
+                nomeCurso,
+                listaCursoAlunoModel.get(c).getDataCriacao().format(DateTimeFormatter.ISO_LOCAL_DATE)
+            });
+        }
+    }
+
+    public void listarMatriculaNomeCurso(String nome) {
+        listaCursoAlunoModel = (ArrayList<CursoAlunoModel>) cursoAlunoController.retornarListarMatriculaCursosController(nome);
+        DefaultTableModel tabela = (DefaultTableModel) jtbMatricula.getModel();
+        tabela.setNumRows(0);
+
+        int contador = listaCursoAlunoModel.size();
+        for (int c = 0; c < contador; c++) {
+            AlunoModel alunoModel = listaCursoAlunoModel.get(c).getCodigoAluno();
+            CursoModel cursoModel = listaCursoAlunoModel.get(c).getCodigoCurso();
+
+            Long codigoAluno = alunoModel.getCodigoAluno();
+            String nomeAluno = alunoModel.getNomeAluno();
+            String nomeCurso = cursoModel.getDescricaoCurso();
+
             tabela.addRow(new Object[]{
                 listaCursoAlunoModel.get(c).getCodigoCursoAluno(),
                 codigoAluno,
@@ -889,20 +957,20 @@ public class MainView extends javax.swing.JFrame {
         }
     }
     
-    public void listarMatriculaNomeCurso(String nome) {
-        listaCursoAlunoModel = (ArrayList<CursoAlunoModel>) cursoAlunoController.retornarListarMatriculaCursosController(nome);
+    public void listarMatriculaId(Long id) {
+        listaCursoAlunoModel = (ArrayList<CursoAlunoModel>) cursoAlunoController.retornarListarMatriculaIdController(id);
         DefaultTableModel tabela = (DefaultTableModel) jtbMatricula.getModel();
         tabela.setNumRows(0);
-        
+
         int contador = listaCursoAlunoModel.size();
         for (int c = 0; c < contador; c++) {
             AlunoModel alunoModel = listaCursoAlunoModel.get(c).getCodigoAluno();
             CursoModel cursoModel = listaCursoAlunoModel.get(c).getCodigoCurso();
-            
+
             Long codigoAluno = alunoModel.getCodigoAluno();
             String nomeAluno = alunoModel.getNomeAluno();
             String nomeCurso = cursoModel.getDescricaoCurso();
-            
+
             tabela.addRow(new Object[]{
                 listaCursoAlunoModel.get(c).getCodigoCursoAluno(),
                 codigoAluno,
