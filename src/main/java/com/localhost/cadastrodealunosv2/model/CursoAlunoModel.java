@@ -8,7 +8,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -25,11 +24,11 @@ public class CursoAlunoModel {
     private Long codigoCursoAluno;
 
     @ManyToOne
-    @JoinColumn(name = "fk_aluno", referencedColumnName = "pk_codigo_aluno")
+    @JoinColumn(name = "fk_aluno", referencedColumnName = "pk_codigo_aluno", nullable = false)
     private AlunoModel codigoAluno;
 
     @ManyToOne
-    @JoinColumn(name = "fk_curso", referencedColumnName = "pk_codigo_curso")
+    @JoinColumn(name = "fk_curso", referencedColumnName = "pk_codigo_curso", nullable = false)
     private CursoModel codigoCurso;
 
     @CreationTimestamp

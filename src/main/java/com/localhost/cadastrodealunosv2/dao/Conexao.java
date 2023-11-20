@@ -31,8 +31,4 @@ public class Conexao {
         return this;
     }
 
-    public void fecharConexao() {
-        entityManager.close();
-    }
-
 }

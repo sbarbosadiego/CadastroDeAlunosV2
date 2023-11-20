@@ -49,6 +49,7 @@ public class CursoView extends javax.swing.JFrame {
         btnCancelarAluno = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Curso");
         setResizable(false);
 
         btnSalvarCurso.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N

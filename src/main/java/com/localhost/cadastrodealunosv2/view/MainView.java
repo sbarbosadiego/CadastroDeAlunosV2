@@ -105,6 +105,7 @@ public class MainView extends javax.swing.JFrame {
         menuLinkedIn = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Cadastro de Alunos V2");
         setResizable(false);
 
         jTabbedPane1.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N

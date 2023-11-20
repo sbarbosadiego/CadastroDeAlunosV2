@@ -4,7 +4,6 @@ import com.localhost.cadastrodealunosv2.model.CursoAlunoModel;
 import java.util.List;
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
-import javax.persistence.Query;
 import javax.swing.JOptionPane;
 
 /**
@@ -87,7 +86,7 @@ public class CursoAlunoDAO extends Conexao {
         }
         return cursoAlunoModel;
     }
-    
+
     /**
      * Retorna uma lista geral de registro de alunos.
      *
@@ -107,6 +106,12 @@ public class CursoAlunoDAO extends Conexao {
         return null;
     }
 
+    /**
+     * Retorna uma lista de matrícula pelo nome do aluno.
+     *
+     * @param nome
+     * @return List
+     */
     public List<CursoAlunoModel> retornarListaMatriculaNomeAluno(String nome) {
         try {
             List<CursoAlunoModel> cursoAlunoModel = entityManager
@@ -124,7 +129,13 @@ public class CursoAlunoDAO extends Conexao {
         }
         return null;
     }
-    
+
+    /**
+     * Retorna uma lista de matrículas pelo nome do curso.
+     *
+     * @param nome
+     * @return List
+     */
     public List<CursoAlunoModel> retornarListaMatriculaNomeCurso(String nome) {
         try {
             List<CursoAlunoModel> cursoAlunoModel = entityManager
@@ -142,14 +153,20 @@ public class CursoAlunoDAO extends Conexao {
         }
         return null;
     }
-    
+
+    /**
+     * Retorna uma lista de matrícula pelo Id da matrícula.
+     *
+     * @param id
+     * @return List
+     */
     public List<CursoAlunoModel> retornarListaMatriculaId(Long id) {
         try {
             List<CursoAlunoModel> cursoAlunoModel = entityManager
                     .createQuery("SELECT m "
                             + "FROM cursos_alunos m "
                             + "WHERE m.codigoCursoAluno = :id", CursoAlunoModel.class)
-                    .setParameter("id",  id)
+                    .setParameter("id", id)
                     .getResultList();
             return cursoAlunoModel;
         } catch (NoResultException | NonUniqueResultException e) {

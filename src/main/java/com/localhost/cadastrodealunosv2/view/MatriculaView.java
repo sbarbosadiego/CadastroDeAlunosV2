@@ -74,7 +74,7 @@ public class MatriculaView extends javax.swing.JFrame {
         btnCancelarMatricula = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Matrícula");
+        setTitle("Cadastro de Matrícula");
         setMinimumSize(new java.awt.Dimension(540, 200));
         setPreferredSize(new java.awt.Dimension(540, 143));
         setResizable(false);
